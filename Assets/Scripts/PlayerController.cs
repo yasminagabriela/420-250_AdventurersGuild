@@ -23,10 +23,10 @@ public class PlayerController : MonoBehaviour
         Keyboard kb = Keyboard.current;
         if (kb == null) return Vector2Int.zero;
 
-        if (kb.wKey.isPressed) return Vector2Int.up;
-        if (kb.sKey.isPressed) return Vector2Int.down;
-        if (kb.aKey.isPressed) return Vector2Int.left;
-        if (kb.dKey.isPressed) return Vector2Int.right;
+        if (kb.wKey.isPressed || kb.upArrowKey.isPressed) return Vector2Int.up;
+        if (kb.sKey.isPressed || kb.downArrowKey.isPressed) return Vector2Int.down;
+        if (kb.aKey.isPressed || kb.leftArrowKey.isPressed) return Vector2Int.left;
+        if (kb.dKey.isPressed || kb.rightArrowKey.isPressed) return Vector2Int.right;
         return Vector2Int.zero;
     }
 
