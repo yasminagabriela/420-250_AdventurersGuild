@@ -1,21 +1,18 @@
+using System;
 using UnityEngine;
 
 public class GridMovementRules
 {
-    private readonly Vector2Int _min;
-    private readonly Vector2Int _max;
+    private readonly Func<Vector2Int, bool> _isWalkable;
 
-    public GridMovementRules(Vector2Int min, Vector2Int max)
+    public GridMovementRules(Func<Vector2Int, bool> isWalkable)
     {
-        _min = min;
-        _max = max;
+        _isWalkable = isWalkable;
     }
 
     public Vector2Int GetNextCell(Vector2Int current, Vector2Int direction)
     {
         Vector2Int target = current + direction;
-        bool inside = target.x >= _min.x && target.x <= _max.x
-                   && target.y >= _min.y && target.y <= _max.y;
-        return inside ? target : current;
+        return _isWalkable(target) ? target : current;
     }
 }
