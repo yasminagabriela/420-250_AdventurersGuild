@@ -19,6 +19,11 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+
+       if (BattleContext.HasReturnPosition)
+          transform.position = BattleContext.PlayerReturnPosition;
+
+
         _rules = new GridMovementRules(IsWalkable);
 
         Vector3Int start = groundTilemap.WorldToCell(transform.position);
