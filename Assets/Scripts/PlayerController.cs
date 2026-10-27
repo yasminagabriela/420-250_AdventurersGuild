@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 4f;
+    [SerializeField] private Rigidbody2D body;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Tilemap groundTilemap;
@@ -65,16 +66,16 @@ public class PlayerController : MonoBehaviour
     {
         _isMoving = true;
         animator.SetBool("IsMoving", true);
-        Vector3 target = CellToWorld(next);
+        Vector2 target = CellToWorld(next);
 
-        while ((transform.position - target).sqrMagnitude > 0.0001f)
+        while ((body.position - target).sqrMagnitude > 0.0001f)
         {
-            transform.position = Vector3.MoveTowards(
-                transform.position, target, moveSpeed * Time.deltaTime);
-            yield return null;
+            body.MovePosition(Vector2.MoveTowards(
+            body.position, target, moveSpeed * Time.fixedDeltaTime));
+            yield return new WaitForFixedUpdate();
         }
 
-        transform.position = target;
+        body.MovePosition(target);
         _cell = next;
         _isMoving = false;
         animator.SetBool("IsMoving", false);
