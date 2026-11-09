@@ -16,4 +16,14 @@ public class WaypointCycleTests
 
     }
 
+
+
+    [Test]
+    public void TesterOnCollisionDetect() {
+
+        var cycle = new WaypointCycle(3, true);
+
+
+    }
+
 }
