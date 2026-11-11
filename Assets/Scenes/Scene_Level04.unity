@@ -846,11 +846,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 829500696902804468, guid: a2168e8f394433842a31b677d25d89bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.5
+      value: 38.1
       objectReference: {fileID: 0}
     - target: {fileID: 829500696902804468, guid: a2168e8f394433842a31b677d25d89bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.5
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 829500696902804468, guid: a2168e8f394433842a31b677d25d89bf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -936,6 +936,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4716938399554194290, guid: a2168e8f394433842a31b677d25d89bf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 261793145}
+    - targetCorrespondingSourceObject: {fileID: 4716938399554194290, guid: a2168e8f394433842a31b677d25d89bf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 261793146}
   m_SourcePrefab: {fileID: 100100000, guid: a2168e8f394433842a31b677d25d89bf, type: 3}
 --- !u!4 &261793137 stripped
 Transform:
@@ -981,6 +984,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cecb005f01a28da458ee044f4eeb2f69, type: 2}
   - {fileID: 11400000, guid: fa05b54f38ca7ec4e9903dc85b272c92, type: 2}
   feetOffset: {x: 0, y: -0.35, z: 0}
+--- !u!114 &261793146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78703332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7c0fd5c4927ca43a2e119209da15d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::SpawnPoint
+  player: {fileID: 261793137}
 --- !u!1001 &264599443
 PrefabInstance:
   m_ObjectHideFlags: 0
