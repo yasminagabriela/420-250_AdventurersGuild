@@ -40,6 +40,7 @@ public class BattleTrigger : MonoBehaviour
         BattleContext.EnemyId = enemyId;
         BattleContext.PlayerReturnPosition = player.transform.position;
         BattleContext.HasReturnPosition = true;
+        BattleContext.ReturnSceneName = SceneManager.GetActiveScene().name; // ajout Talyssa
 
         animator.SetTrigger("Attack");
         yield return new WaitForSeconds(attackDelay);
