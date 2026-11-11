@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6f9306ac15f4740afbaa81c371b002, type: 3}
+  m_Name: Enemy_Champignon
+  m_EditorClassIdentifier: AdventurersGuild.Level03::AdventurersGuild.EnemyData
+  id: champignon
+  displayName: Champignon toxique
+  isBoss: 0
+  maxHp: 24
+  attack: 5
+  defense: 3
+  agility: 4
+  skillName: Spores toxiques
+  skillType: 1
+  skillChance: 0.45
+  statusChance: 0.6
+  skillPower: 5
+  xpReward: 10
+  goldReward: 8
+  groupMin: 1
+  groupMax: 2
+  idleFrames:
+  - {fileID: 21300000, guid: 69d585d1de52bd9498ac33cd0346ce82, type: 3}
+  - {fileID: 21300000, guid: 6d3d9c3bfb2145c41ae4f7c3eac57039, type: 3}
+  attackFrame: {fileID: 21300000, guid: ffa7c839d6125724abf66bce68eca997, type: 3}
+  battleScale: 3
+  tint: {r: 1, g: 1, b: 1, a: 1}
