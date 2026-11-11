@@ -25,6 +25,7 @@ public class BattleTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (_triggered || !other.CompareTag("Player")) return;
+        if (Time.timeSinceLevelLoad < BattleContext.TriggerGraceSeconds) return; // ajout Talyssa
         _triggered = true;
         StartCoroutine(StartBattle(other));
     }
