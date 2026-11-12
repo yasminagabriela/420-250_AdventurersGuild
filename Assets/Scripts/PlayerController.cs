@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private TileBase[] walkableTiles;
     [SerializeField] private Vector3 feetOffset = new Vector3(0f, -0.35f, 0f);
+    [SerializeField] private bool useBlendTrees = true;
 
     private GridMovementRules _rules;
     private Vector2Int _cell;
@@ -61,7 +62,12 @@ public class PlayerController : MonoBehaviour
         Vector2Int dir = ReadDirection();
         if (dir == Vector2Int.zero) return;
 
-        if (dir.x != 0) spriteRenderer.flipX = dir.x < 0;
+        if (useBlendTrees)
+        {
+            animator.SetFloat("MoveX", dir.x);
+            animator.SetFloat("MoveY", dir.y);
+        }
+        else if (dir.x != 0) spriteRenderer.flipX = dir.x < 0;
 
         Vector2Int next = _rules.GetNextCell(_cell, dir);
         if (next != _cell) StartCoroutine(MoveTo(next));
