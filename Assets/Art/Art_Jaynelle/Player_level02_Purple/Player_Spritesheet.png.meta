@@ -476,28 +476,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_idle
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 641
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 427542f5ab029abd0800000000000000
-      internalID: -2618525723507009756
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Player_found
       rect:
         serializedVersion: 2
@@ -894,33 +872,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_idle_right
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 384
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b71dc529939d8e510800000000000000
-      internalID: 1578750510685278587
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Player_walk_right_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 320
+        y: 323
         width: 64
         height: 64
       alignment: 0
@@ -942,7 +898,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 320
+        y: 323
         width: 64
         height: 64
       alignment: 0
@@ -964,7 +920,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 320
+        y: 323
         width: 64
         height: 64
       alignment: 0
@@ -986,7 +942,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 320
+        y: 323
         width: 64
         height: 64
       alignment: 0
@@ -1008,7 +964,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 320
+        y: 323
         width: 64
         height: 64
       alignment: 0
@@ -1030,7 +986,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 320
-        y: 320
+        y: 323
         width: 64
         height: 64
       alignment: 0
@@ -1052,7 +1008,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 320
+        y: 323
         width: 64
         height: 64
       alignment: 0
@@ -1074,7 +1030,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 448
-        y: 320
+        y: 323
         width: 64
         height: 64
       alignment: 0
@@ -1285,28 +1241,6 @@ TextureImporter:
       bones: []
       spriteID: 2c2ea69752be989f0800000000000000
       internalID: -465582540272770366
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_idle_up
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0a266a051624eab20800000000000000
-      internalID: 3147526175310897824
       vertices: []
       indices: 
       edges: []
@@ -1597,6 +1531,182 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player_Spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 023f5791ace05894282fb109a89b9f30
+      internalID: -1061821718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdeac64a228d4dd4394e3d72fb603c90
+      internalID: -1218945559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8b6393623673e54ba10983d0005d382
+      internalID: 48252938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bee072d3f15b30478abb62a84c1aa1e
+      internalID: -1429313826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04fbb3e561579864d8c0168c6462bd05
+      internalID: -2098601615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24faa52d80ff5034bbb62b0475221eab
+      internalID: -1321657206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58f2fb846a468d44b8a7e76f94b13d51
+      internalID: -621223239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7df08cfdc8f9e54cba798e4ecd84bdf
+      internalID: 1023578937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -1611,25 +1721,43 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":1,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Player_0: 6276676093532118851
       Player_Crounch: 6920209119401886799
+      Player_Spritesheet_0: 1427922672
+      Player_Spritesheet_1: -1061821718
+      Player_Spritesheet_10: 607178233
+      Player_Spritesheet_11: -133013583
+      Player_Spritesheet_12: -536386957
+      Player_Spritesheet_13: 748021836
+      Player_Spritesheet_14: -2013602185
+      Player_Spritesheet_15: 1256121407
+      Player_Spritesheet_16: -1000082609
+      Player_Spritesheet_17: 637671856
       Player_Spritesheet_18: 3374566073458710409
       Player_Spritesheet_19: -5086307448801496899
+      Player_Spritesheet_2: -1218945559
       Player_Spritesheet_20: 7904018177185943816
       Player_Spritesheet_21: -7103094214377759310
       Player_Spritesheet_22: 1223079794470490614
       Player_Spritesheet_23: 2055399692706664369
       Player_Spritesheet_24: -3594755733442371706
+      Player_Spritesheet_3: 48252938
+      Player_Spritesheet_4: -1429313826
       Player_Spritesheet_44: -3158338906944984845
       Player_Spritesheet_45: -7025928619969351168
       Player_Spritesheet_46: -3715032015303563348
       Player_Spritesheet_47: -6142679866740475162
       Player_Spritesheet_48: 244136162150617104
       Player_Spritesheet_49: 1315284606134909571
+      Player_Spritesheet_5: -2098601615
       Player_Spritesheet_50: -3468344968495494281
       Player_Spritesheet_51: -1285725943646764031
+      Player_Spritesheet_6: -1321657206
+      Player_Spritesheet_7: -621223239
+      Player_Spritesheet_8: 1023578937
+      Player_Spritesheet_9: 1569135852
       Player_attack_down_0: 3252691779180768709
       Player_attack_down_1: -7225158043987556777
       Player_attack_down_2: 6049138147863513866
