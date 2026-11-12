@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private TileBase[] walkableTiles;
     [SerializeField] private Vector3 feetOffset = new Vector3(0f, -0.35f, 0f);
+    [SerializeField] private bool reverseFlipDirection = false;
 
     private GridMovementRules _rules;
     private Vector2Int _cell;
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
         Vector2Int dir = ReadDirection();
         if (dir == Vector2Int.zero) return;
 
-        if (dir.x != 0) spriteRenderer.flipX = dir.x < 0;
+        if (dir.x != 0) spriteRenderer.flipX = reverseFlipDirection ? dir.x > 0 : dir.x < 0;
 
         Vector2Int next = _rules.GetNextCell(_cell, dir);
         if (next != _cell) StartCoroutine(MoveTo(next));

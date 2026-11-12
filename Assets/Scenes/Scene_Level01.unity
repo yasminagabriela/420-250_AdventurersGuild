@@ -539,6 +539,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 40557463dfe54b7419b0f23e6cae5509, type: 2}
   - {fileID: 11400000, guid: 1dd4f26cd215344429b94a50dc3b85db, type: 2}
   feetOffset: {x: 0, y: -0.35, z: 0}
+  useBlendTrees: 0
 --- !u!50 &552679333
 Rigidbody2D:
   serializedVersion: 5
