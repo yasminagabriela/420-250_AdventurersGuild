@@ -10,6 +10,7 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] private Rigidbody2D body;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private bool useBlendTrees = false;
 
 
     private WaypointCycle _cycle;
@@ -40,7 +41,12 @@ public class EnemyPatrol : MonoBehaviour
             {
                 float dx = target.x - body.position.x;
                 if (Mathf.Abs(dx) > 0.01f) spriteRenderer.flipX = dx < 0;
-
+                {
+                    if (useBlendTrees)
+                        animator.SetFloat("MoveX", dx > 0 ? 1f : -1f);
+                    else
+                        spriteRenderer.flipX = dx < 0;
+                }
                 body.MovePosition(Vector2.MoveTowards(
                     body.position, target, moveSpeed * Time.fixedDeltaTime));
                 yield return new WaitForFixedUpdate();
