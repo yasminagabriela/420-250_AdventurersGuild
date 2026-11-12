@@ -90189,7 +90189,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0fd5a268ece994346a1a42a7f31aad62, type: 2}
   - {fileID: 11400000, guid: eb3955a0747a9f14c9296f61ca7de3ed, type: 2}
   feetOffset: {x: 0, y: -0.35, z: 0}
-  useBlendTrees: 0
+  reverseFlipDirection: 1
 --- !u!95 &1948151367
 Animator:
   serializedVersion: 7
@@ -90200,7 +90200,7 @@ Animator:
   m_GameObject: {fileID: 1948151363}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f0b0a3d60fd01ed4c9ca8fc644bc9372, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
