@@ -453,7 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::BattleThemeApplier
   background: {fileID: 1262360897}
   playerAnimator: {fileID: 1453264565}
-  fallbackTheme: {fileID: 11400000, guid: 8e501e5f15e8c09448d9f637308082d7, type: 2}
+  fallbackTheme: {fileID: 11400000, guid: d0376243ae4646344b9282233840d0ba, type: 2}
 --- !u!4 &875391477
 Transform:
   m_ObjectHideFlags: 0
@@ -705,10 +705,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.07325383
-    y: 0.018716577
-    width: 0.85178876
-    height: 0.96256685
+    x: 0.13662791
+    y: 0.30537635
+    width: 0.7267442
+    height: 0.3870968
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
