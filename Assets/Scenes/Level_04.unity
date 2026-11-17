@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 56180473}
   - component: {fileID: 56180472}
   - component: {fileID: 56180476}
+  - component: {fileID: 56180477}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -371,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 56180471}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: -0.7, z: 0}
+  m_LocalPosition: {x: 38.5, y: 2.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -421,6 +422,24 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &56180477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56180471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb1df2754d165d4a8386db0e9054ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::BattleTrigger
+  theme: {fileID: 11400000, guid: e9e18b15b6b7c8d4a9bce69b93513186, type: 2}
+  enemyId: gloob_1
+  battleSceneName: BattleScene
+  animator: {fileID: 0}
+  patrol: {fileID: 0}
+  attackDelay: 0.6
 --- !u!1001 &71106187
 PrefabInstance:
   m_ObjectHideFlags: 0

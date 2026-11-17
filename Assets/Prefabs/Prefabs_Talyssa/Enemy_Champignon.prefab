@@ -201,6 +201,7 @@ MonoBehaviour:
   body: {fileID: 687925387436863284}
   animator: {fileID: 1235230495364508757}
   spriteRenderer: {fileID: 2327337996881033307}
+  useBlendTrees: 0
 --- !u!114 &4248200637630951556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb1df2754d165d4a8386db0e9054ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::BattleTrigger
+  theme: {fileID: 11400000, guid: e9e18b15b6b7c8d4a9bce69b93513186, type: 2}
   enemyId: champignon_1
   battleSceneName: BattleScene
   animator: {fileID: 1235230495364508757}

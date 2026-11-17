@@ -69,8 +69,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -302,6 +302,7 @@ MonoBehaviour:
   body: {fileID: 1410733426742022150}
   animator: {fileID: 2808890714437399981}
   spriteRenderer: {fileID: 773745809167639460}
+  useBlendTrees: 0
 --- !u!114 &2678404256639987677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,6 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb1df2754d165d4a8386db0e9054ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::BattleTrigger
+  theme: {fileID: 11400000, guid: e9e18b15b6b7c8d4a9bce69b93513186, type: 2}
   enemyId: feufollet_1
   battleSceneName: BattleScene
   animator: {fileID: 2808890714437399981}
