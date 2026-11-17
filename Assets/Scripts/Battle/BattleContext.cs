@@ -10,6 +10,7 @@ public static class BattleContext
     public static BattleTheme Theme;
     public static string ReturnSceneName;
 
+    public static float TriggerGraceSeconds;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetStatics()
