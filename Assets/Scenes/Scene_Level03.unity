@@ -5134,6 +5134,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3275292806937358340, guid: c20ef13dc20a7c94a9df943aa03421aa, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4999377120159075789, guid: c20ef13dc20a7c94a9df943aa03421aa, type: 3}
       propertyPath: m_Name
       value: Ennemy
