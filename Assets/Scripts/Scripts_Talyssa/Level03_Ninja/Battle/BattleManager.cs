@@ -143,10 +143,8 @@ namespace AdventurersGuild
                     _chosenTarget = _enemies.Where(e => e.IsAlive).OrderBy(e => e.Hp).FirstOrDefault();
                     _chosen = ActionKind.Attack;
                     break;
-                case 1:
-                    bool lowHp = PartyState.Hp < PartyState.MaxHp * 0.4f;
-                    if (lowHp && PartyState.Mp >= HealCost) _chosen = ActionKind.Heal;
-                    else if (PartyState.Mp >= FireCost) _chosen = ActionKind.FireShuriken;
+                case 1: // Soigner
+                    if (PartyState.Hp >= PartyState.MaxHp) StartCoroutine(Say("Tes PV sont déjà au maximum !", 0.9f));
                     else if (PartyState.Mp >= HealCost) _chosen = ActionKind.Heal;
                     else StartCoroutine(Say("Pas assez de PM !", 0.9f));
                     break;

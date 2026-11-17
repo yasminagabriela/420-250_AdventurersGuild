@@ -705,10 +705,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.13662791
-    y: 0.30537635
-    width: 0.7267442
-    height: 0.3870968
+    x: 0.2563353
+    y: 0.008196721
+    width: 0.48732942
+    height: 0.9836065
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1289,6 +1289,66 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &2126084412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2126084414}
+  - component: {fileID: 2126084413}
+  m_Layer: 0
+  m_Name: BattleManager_Talyssa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2126084413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126084412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa19b45c2c985eb48b53a117efcbbd1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AdventurersGuild.Level03::AdventurersGuild.BattleManager
+  enemyDatabase:
+  - {fileID: 11400000, guid: 7de407ddd4a61bf49bfc3c3716525a9a, type: 2}
+  - {fileID: 11400000, guid: 874f06d63d8db504d9fe383eed9d2c1f, type: 2}
+  - {fileID: 11400000, guid: 017ea58f935ced3459337a2a8e567e7a, type: 2}
+  - {fileID: 11400000, guid: 16c67787339bffa4582153b5d6a2c5e7, type: 2}
+  unitPrefab: {fileID: 7348050009886636434, guid: 3e69995e5f6817b4db174fe88be160dc, type: 3}
+  heroIdleFrames: []
+  heroAttackFrame: {fileID: 0}
+  fallbackReturnScene: Level_04
+  debugEnemyId: 
+  heroPosition: {x: 5.5, y: -0.8}
+  enemyAreaCenter: {x: -4.5, y: -0.6}
+  heroScale: 3
+  teamMenu: {fileID: 800195141}
+  teamPlayer: {fileID: 1453264563}
+  teamHeroHeight: 3
+--- !u!4 &2126084414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126084412}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 38.5, y: 2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1299,3 +1359,4 @@ SceneRoots:
   - {fileID: 1213914589}
   - {fileID: 800195140}
   - {fileID: 875391477}
+  - {fileID: 2126084414}

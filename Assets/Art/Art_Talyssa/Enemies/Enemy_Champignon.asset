@@ -31,6 +31,6 @@ MonoBehaviour:
   idleFrames:
   - {fileID: 21300000, guid: 69d585d1de52bd9498ac33cd0346ce82, type: 3}
   - {fileID: 21300000, guid: 6d3d9c3bfb2145c41ae4f7c3eac57039, type: 3}
-  attackFrame: {fileID: 21300000, guid: ffa7c839d6125724abf66bce68eca997, type: 3}
+  attackFrame: {fileID: 21300000, guid: 69d585d1de52bd9498ac33cd0346ce82, type: 3}
   battleScale: 3
   tint: {r: 1, g: 1, b: 1, a: 1}
