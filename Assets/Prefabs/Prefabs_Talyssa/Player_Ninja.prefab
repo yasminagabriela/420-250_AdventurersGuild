@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 7152562642920850764}
   - component: {fileID: 5525314902996325452}
   - component: {fileID: 4211507967734171273}
-  - component: {fileID: 4859180365596351513}
   - component: {fileID: 1042394001258937627}
+  - component: {fileID: 8870650424652310895}
+  - component: {fileID: 6013940770101589287}
   m_Layer: 0
   m_Name: Player_Ninja
   m_TagString: Player
@@ -126,7 +127,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4716938399554194290}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -144,7 +145,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &4211507967734171273
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -191,7 +192,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.7, y: 0.7}
   m_EdgeRadius: 0
---- !u!114 &4859180365596351513
+--- !u!114 &1042394001258937627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716938399554194290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661d8d698c0022640bf350927d358854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AdventurersGuild.Level03::AdventurersGuild.YSort
+  baseOrder: 1000
+  yOffset: 0
+  isStatic: 0
+--- !u!114 &8870650424652310895
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,13 +225,14 @@ MonoBehaviour:
   spriteRenderer: {fileID: 4989028255769976141}
   groundTilemap: {fileID: 0}
   walkableTiles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 0f13e44534fffd14c81439986760d398, type: 2}
+  - {fileID: 11400000, guid: d5ba67c02b727fc49a998aaa4a97e384, type: 2}
+  - {fileID: 11400000, guid: 788ececa20232984dbfaafebcfa8de6d, type: 2}
+  - {fileID: 11400000, guid: cecb005f01a28da458ee044f4eeb2f69, type: 2}
+  - {fileID: 11400000, guid: fa05b54f38ca7ec4e9903dc85b272c92, type: 2}
+  - {fileID: 11400000, guid: c738137d4b3be3942879b6a7682dc880, type: 2}
   feetOffset: {x: 0, y: 0, z: 0}
---- !u!114 &1042394001258937627
+--- !u!114 &6013940770101589287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,9 +241,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4716938399554194290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661d8d698c0022640bf350927d358854, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b7c0fd5c4927ca43a2e119209da15d8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: AdventurersGuild.Level03::AdventurersGuild.YSort
-  baseOrder: 1000
-  yOffset: 0
-  isStatic: 0
+  m_EditorClassIdentifier: GameScripts::SpawnPoint
+  player: {fileID: 829500696902804468}

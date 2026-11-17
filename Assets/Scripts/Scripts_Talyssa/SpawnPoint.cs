@@ -11,6 +11,19 @@ public class SpawnPoint : MonoBehaviour
 {
     [SerializeField] private Transform player;
 
+    // Exécuté une seule fois au début de chaque Play :
+    // efface les vieilles valeurs de combat restées en mémoire.
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetBattleMemory()
+    {
+        BattleContext.HasReturnPosition = false;
+        BattleContext.PlayerReturnPosition = Vector3.zero;
+        BattleContext.ReturnSceneName = null;
+        BattleContext.EnemyId = null;
+        BattleContext.TriggerGraceSeconds = 0f;
+        BattleContext.DefeatedEnemies.Clear();
+    }
+
     private void Awake()
     {
         if (player == null)
@@ -20,8 +33,12 @@ public class SpawnPoint : MonoBehaviour
         }
         if (player == null) return;
 
-        bool retourCombat = BattleContext.HasReturnPosition
-                            && BattleContext.ReturnSceneName == SceneManager.GetActiveScene().name;
+        string scene = SceneManager.GetActiveScene().name;
+        bool retourCombat = BattleContext.HasReturnPosition && BattleContext.ReturnSceneName == scene;
+
+        // Position de retour d'une autre scène -> on l'ignore
+        if (BattleContext.HasReturnPosition && !retourCombat)
+            BattleContext.HasReturnPosition = false;
 
         Vector3 pos = retourCombat ? BattleContext.PlayerReturnPosition : transform.position;
         pos.z = 0f;
@@ -29,9 +46,10 @@ public class SpawnPoint : MonoBehaviour
 
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
         if (rb != null) rb.position = pos;
+
+        Debug.Log($"[SpawnPoint] Joueur placé en {pos} (retour de combat : {retourCombat})");
     }
 
-    // Petit cercle vert visible dans la fenêtre Scene
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
