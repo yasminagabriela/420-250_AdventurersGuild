@@ -7,11 +7,16 @@ public static class BattleContext
     public static Vector3 PlayerReturnPosition;
     public static bool HasReturnPosition;
     public static readonly HashSet<string> DefeatedEnemies = new HashSet<string>();
+    public static BattleTheme Theme;
+    public static string ReturnSceneName;
+
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetStatics()
     {
+        ReturnSceneName = null;
         EnemyId = null;
+        Theme = null;
         HasReturnPosition = false;
         PlayerReturnPosition = Vector3.zero;
         DefeatedEnemies.Clear();
