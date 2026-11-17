@@ -18,7 +18,7 @@ namespace AdventurersGuild.EditorTools
     ///  - réglages d'import pixel art (16 PPU, Point, sans compression)
     ///  - Tiles, animations + Animator Controllers, fiches EnemyData
     ///  - prefabs (ninja, ennemis, PNJ, animaux, décors, unité de combat)
-    ///  - Scene_Level04 (d'après Tiles/Level03_Map.txt) et BattleScene
+    ///  - Level_04 (d'après Tiles/Level03_Map.txt) et BattleScene
     /// On peut le relancer après avoir modifié un sprite dans Pixelorama.
     /// </summary>
     public static class Level03Builder
@@ -28,7 +28,7 @@ namespace AdventurersGuild.EditorTools
         private const string DataDir = Art + "/Enemies";
         private const string AnimDir = "Assets/Animation/Animations_Talyssa";
         private const string PrefabDir = "Assets/Prefabs/Prefabs_Talyssa";
-        private const string LevelScenePath = "Assets/Scenes/Scene_Level04.unity";
+        private const string LevelScenePath = "Assets/Scenes/Level_04.unity";
         private const string BattleScenePath = "Assets/Scenes/BattleScene.unity";
         private const string MapPath = Art + "/Tiles/Level03_Map.txt";
         private const int PixelsPerUnit = 16;
@@ -38,6 +38,12 @@ namespace AdventurersGuild.EditorTools
         public static void BuildAll()
         {
             if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+            if (AssetDatabase.LoadAssetAtPath<SceneAsset>(LevelScenePath) != null &&
+                !EditorUtility.DisplayDialog("Écraser Level_04 ?",
+                    "Level_04 existe déjà. « Tout construire » va la RECRÉER et effacer tes modifications faites à la main.\n\n" +
+                    "Pour seulement repeindre les tuiles, utilise plutôt « Peindre la carte dans le Grid sélectionné ».",
+                    "Écraser", "Annuler"))
+                return;
             try
             {
                 ShowProgress("Réglages d'import des sprites", 0.05f);
@@ -50,16 +56,20 @@ namespace AdventurersGuild.EditorTools
                 EnemyData[] enemies = CreateEnemyData();
                 ShowProgress("Prefabs", 0.6f);
                 Prefabs prefabs = CreatePrefabs(ctrls);
-                ShowProgress("BattleScene", 0.75f);
-                BuildBattleScene(enemies, prefabs);
-                ShowProgress("Scene_Level04", 0.85f);
+                // BattleScene appartient maintenant à l'équipe : on ne la recrée jamais si elle existe.
+                if (AssetDatabase.LoadAssetAtPath<SceneAsset>(BattleScenePath) == null)
+                {
+                    ShowProgress("BattleScene", 0.75f);
+                    BuildBattleScene(enemies, prefabs);
+                }
+                ShowProgress("Level_04", 0.85f);
                 BuildLevelScene(tiles, prefabs);
                 AddScenesToBuildSettings();
                 AssetDatabase.SaveAssets();
                 EditorUtility.ClearProgressBar();
                 EditorSceneManager.OpenScene(LevelScenePath);
                 EditorUtility.DisplayDialog("Niveau 4 prêt !",
-                    "Scene_Level04 et BattleScene ont été créées.\n\nAppuie sur Play pour jouer :\n" +
+                    "Level_04 et BattleScene ont été créées.\n\nAppuie sur Play pour jouer :\n" +
                     "WASD/flèches = bouger, E/Espace = parler/ouvrir, Entrée = valider en combat, Échap = retour.", "Super !");
             }
             catch (Exception e)
@@ -589,7 +599,7 @@ namespace AdventurersGuild.EditorTools
             new P(mgr).Refs("enemyDatabase", enemies).Ref("unitPrefab", p.BattleUnit)
                       .Refs("heroIdleFrames", Frames("Player_level04_Ninja/ninja", "idle_0", "idle_1"))
                       .Ref("heroAttackFrame", S("Player_level04_Ninja/ninja_attack_1"))
-                      .Str("fallbackReturnScene", "Scene_Level04").Apply();
+                      .Str("fallbackReturnScene", "Level_04").Apply();
 
             EditorSceneManager.SaveScene(scene, BattleScenePath);
         }

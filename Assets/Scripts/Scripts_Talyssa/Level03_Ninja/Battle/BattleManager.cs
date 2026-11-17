@@ -21,14 +21,24 @@ namespace AdventurersGuild
         [SerializeField] private Sprite[] heroIdleFrames;
         [SerializeField] private Sprite heroAttackFrame;
         [Tooltip("Scène chargée après le combat si BattleContext.ReturnSceneName est vide.")]
-        [SerializeField] private string fallbackReturnScene = "Scene_Level04";
-        [Tooltip("Pour tester BattleScene directement (sans passer par la carte).")]
-        [SerializeField] private string debugEnemyId = "serpent_1";
+        [SerializeField] private string fallbackReturnScene = "Level_04";
+        [Tooltip("Pour tester BattleScene directement : ex. serpent_1. Laisser vide pour ne rien faire.")]
+        [SerializeField] private string debugEnemyId = "";
 
         [Header("Placement")]
         [SerializeField] private Vector2 heroPosition = new Vector2(5.5f, -0.8f);
         [SerializeField] private Vector2 enemyAreaCenter = new Vector2(-4.5f, -0.6f);
         [SerializeField] private float heroScale = 3f;
+
+        [Header("Scène de combat de l'équipe (optionnel)")]
+        [Tooltip("Le menu Attaque / Sort / Fuite de l'équipe. Si rempli, il remplace le menu bleu.")]
+        [SerializeField] private BattleMenu teamMenu;
+        [Tooltip("L'objet Player de BattleScene (son sprite vient du BattleTheme).")]
+        [SerializeField] private SpriteRenderer teamPlayer;
+        [Tooltip("Hauteur du héros en unités (le ninja 16 px est agrandi pour faire cette taille).")]
+        [SerializeField] private float teamHeroHeight = 3f;
+
+        private bool TeamMode => teamMenu != null;
 
         private enum Phase { Intro, Command, Busy, Victory, Defeat }
         private enum Menu { Main, Ninjutsu, Items, Target }
@@ -65,15 +75,32 @@ namespace AdventurersGuild
             EnemyData data = FindEnemyData(_encounterId);
             if (data == null)
             {
-                Debug.LogError($"[BattleManager] Aucun EnemyData pour '{_encounterId}'. Vérifie la liste Enemy Database.");
+                // Ennemi d'un autre niveau (ex. Gloob) : on laisse la scène de l'équipe fonctionner seule.
+                Debug.Log($"[BattleManager] '{_encounterId}' n'est pas un ennemi du niveau 4 : combat géré par l'équipe.");
+                enabled = false;
                 return;
             }
 
             if (PartyState.Hp <= 0) PartyState.RestoreFull();
 
-            _hero = Instantiate(unitPrefab, heroPosition, Quaternion.identity);
-            _hero.name = "Hero_Ninja";
-            _hero.SetupHero(heroIdleFrames, heroAttackFrame, heroScale);
+            if (teamPlayer != null)
+            {
+                // On réutilise le Player de la scène (sprite / animator posés par BattleThemeApplier).
+                _hero = teamPlayer.GetComponent<BattleUnit>();
+                if (_hero == null) _hero = teamPlayer.gameObject.AddComponent<BattleUnit>();
+                Sprite reference = BattleContext.Theme != null && BattleContext.Theme.playerSprite != null
+                    ? BattleContext.Theme.playerSprite : teamPlayer.sprite;
+                float unitHeight = reference != null ? reference.rect.height / reference.pixelsPerUnit : 1f;
+                _hero.SetupHero(null, null, teamHeroHeight / Mathf.Max(0.01f, unitHeight));
+            }
+            else
+            {
+                _hero = Instantiate(unitPrefab, heroPosition, Quaternion.identity);
+                _hero.name = "Hero_Ninja";
+                _hero.SetupHero(heroIdleFrames, heroAttackFrame, heroScale);
+            }
+
+            if (TeamMode) teamMenu.Confirmed += OnTeamMenuConfirmed;
 
             int count = Random.Range(data.groupMin, data.groupMax + 1);
             for (int i = 0; i < count; i++)
@@ -83,7 +110,7 @@ namespace AdventurersGuild
                 string label = count > 1 ? $"{data.displayName} {(char)('A' + i)}" : data.displayName;
                 u.name = "Enemy_" + label;
                 u.SetupEnemy(data, label);
-                u.GetComponent<SpriteRenderer>().sortingOrder = 10 + i;
+                u.GetComponent<SpriteRenderer>().sortingOrder = 3 + i; // devant le fond (0) et le Player (2), derrière le menu (10-11)
                 _enemies.Add(u);
             }
             _canFlee = !data.isBoss;
@@ -92,12 +119,47 @@ namespace AdventurersGuild
 
         private EnemyData FindEnemyData(string encounterId)
         {
-            if (enemyDatabase == null || enemyDatabase.Length == 0) return null;
+            if (enemyDatabase == null || enemyDatabase.Length == 0 || string.IsNullOrEmpty(encounterId)) return null;
             string key = encounterId.ToLowerInvariant();
             // "serpent_2" -> cherche l'EnemyData dont l'id est le début ("serpent")
             EnemyData best = enemyDatabase.Where(e => e != null && key.StartsWith(e.id.ToLowerInvariant()))
                                           .OrderByDescending(e => e.id.Length).FirstOrDefault();
-            return best != null ? best : enemyDatabase[0];
+            if (best != null) return best;
+            return null;
+        }
+
+        private void OnDestroy()
+        {
+            if (teamMenu != null) teamMenu.Confirmed -= OnTeamMenuConfirmed;
+        }
+
+        /// <summary>Menu de l'équipe : 0 = Attaque, 1 = Sort, 2 = Fuite.</summary>
+        private void OnTeamMenuConfirmed(int index)
+        {
+            if (_phase != Phase.Command || _chosen != null) return;
+            switch (index)
+            {
+                case 0:
+                    _chosenTarget = _enemies.Where(e => e.IsAlive).OrderBy(e => e.Hp).FirstOrDefault();
+                    _chosen = ActionKind.Attack;
+                    break;
+                case 1:
+                    bool lowHp = PartyState.Hp < PartyState.MaxHp * 0.4f;
+                    if (lowHp && PartyState.Mp >= HealCost) _chosen = ActionKind.Heal;
+                    else if (PartyState.Mp >= FireCost) _chosen = ActionKind.FireShuriken;
+                    else if (PartyState.Mp >= HealCost) _chosen = ActionKind.Heal;
+                    else StartCoroutine(Say("Pas assez de PM !", 0.9f));
+                    break;
+                default:
+                    if (_canFlee) _chosen = ActionKind.Flee;
+                    else StartCoroutine(Say("Impossible de fuir un boss !", 0.9f));
+                    break;
+            }
+        }
+
+        private void SetTeamMenuActive(bool active)
+        {
+            if (teamMenu != null) teamMenu.enabled = active;
         }
 
         private static Vector2 EnemyOffset(int i, int count, float scale)
@@ -114,6 +176,7 @@ namespace AdventurersGuild
         private IEnumerator BattleLoop(EnemyData data, int count)
         {
             _phase = Phase.Intro;
+            SetTeamMenuActive(false);
             yield return Say(count > 1 ? $"{count} {data.displayName}s surgissent !" : $"{data.displayName} apparaît !");
             if (data.isBoss) yield return Say("Une présence redoutable... Impossible de fuir !");
 
@@ -131,9 +194,11 @@ namespace AdventurersGuild
                 {
                     _menu = Menu.Main; _cursor = 0; _message = "";
                     _phase = Phase.Command;
+                    SetTeamMenuActive(true);
                     while (_chosen == null) yield return null;
                 }
                 _phase = Phase.Busy;
+                SetTeamMenuActive(false);
 
                 // ---- fuite (résolue avant les autres actions)
                 if (_chosen == ActionKind.Flee)
@@ -184,78 +249,78 @@ namespace AdventurersGuild
             switch (action)
             {
                 case ActionKind.Attack:
-                {
-                    if (target == null || !target.IsAlive) target = _enemies.FirstOrDefault(e => e.IsAlive);
-                    if (target == null) yield break;
-                    yield return _hero.Lunge();
-                    if (Random.value > BattleMath.HitChance(_hero.Agility, target.Agility))
                     {
-                        AddPopup(target.HeadPosition, "Raté", Color.white);
-                        yield return Say($"Le Ninja rate {target.DisplayName} !");
-                        yield break;
+                        if (target == null || !target.IsAlive) target = _enemies.FirstOrDefault(e => e.IsAlive);
+                        if (target == null) yield break;
+                        yield return _hero.Lunge();
+                        if (Random.value > BattleMath.HitChance(_hero.Agility, target.Agility))
+                        {
+                            AddPopup(target.HeadPosition, "Raté", Color.white);
+                            yield return Say($"Le Ninja rate {target.DisplayName} !");
+                            yield break;
+                        }
+                        bool crit = Random.value < 0.15f;
+                        int dmg = BattleMath.PhysicalDamage(_hero.Attack, target.Defense, Random.value);
+                        if (crit) dmg = Mathf.RoundToInt(dmg * BattleMath.CritMultiplier);
+                        yield return HitEnemy(target, dmg, crit ? new Color(1f, 0.85f, 0.2f) : Color.white);
+                        yield return Say(crit ? $"Coup critique ! {target.DisplayName} subit {dmg} dégâts !"
+                                              : $"{target.DisplayName} subit {dmg} dégâts.");
+                        break;
                     }
-                    bool crit = Random.value < 0.15f;
-                    int dmg = BattleMath.PhysicalDamage(_hero.Attack, target.Defense, Random.value);
-                    if (crit) dmg = Mathf.RoundToInt(dmg * BattleMath.CritMultiplier);
-                    yield return HitEnemy(target, dmg, crit ? new Color(1f, 0.85f, 0.2f) : Color.white);
-                    yield return Say(crit ? $"Coup critique ! {target.DisplayName} subit {dmg} dégâts !"
-                                          : $"{target.DisplayName} subit {dmg} dégâts.");
-                    break;
-                }
                 case ActionKind.FireShuriken:
-                {
-                    PartyState.Mp -= FireCost;
-                    yield return _hero.CastPose(new Color(1f, 0.6f, 0.2f));
-                    yield return Say("Ninjutsu : Shuriken de feu !");
-                    foreach (BattleUnit e in _enemies.Where(e => e.IsAlive).ToList())
                     {
-                        int dmg = BattleMath.MagicDamage(Mathf.RoundToInt(PartyState.Magic * 1.5f), Random.value);
-                        StartCoroutine(e.Flash(new Color(1f, 0.5f, 0.1f)));
-                        yield return HitEnemy(e, dmg, new Color(1f, 0.6f, 0.2f));
+                        PartyState.Mp -= FireCost;
+                        yield return _hero.CastPose(new Color(1f, 0.6f, 0.2f));
+                        yield return Say("Ninjutsu : Shuriken de feu !");
+                        foreach (BattleUnit e in _enemies.Where(e => e.IsAlive).ToList())
+                        {
+                            int dmg = BattleMath.MagicDamage(Mathf.RoundToInt(PartyState.Magic * 1.5f), Random.value);
+                            StartCoroutine(e.Flash(new Color(1f, 0.5f, 0.1f)));
+                            yield return HitEnemy(e, dmg, new Color(1f, 0.6f, 0.2f));
+                        }
+                        break;
                     }
-                    break;
-                }
                 case ActionKind.Heal:
-                {
-                    PartyState.Mp -= HealCost;
-                    int amount = PartyState.Magic * 2 + Random.Range(4, 10);
-                    yield return _hero.CastPose(new Color(0.4f, 1f, 0.6f));
-                    HealHero(amount);
-                    yield return Say($"Ninjutsu : Soin ! +{amount} PV");
-                    break;
-                }
+                    {
+                        PartyState.Mp -= HealCost;
+                        int amount = PartyState.Magic * 2 + Random.Range(4, 10);
+                        yield return _hero.CastPose(new Color(0.4f, 1f, 0.6f));
+                        HealHero(amount);
+                        yield return Say($"Ninjutsu : Soin ! +{amount} PV");
+                        break;
+                    }
                 case ActionKind.Purify:
-                {
-                    PartyState.Mp -= PurifyCost;
-                    yield return _hero.CastPose(new Color(0.7f, 0.9f, 1f));
-                    PartyState.Poisoned = false;
-                    yield return Say("Ninjutsu : Purification ! Le poison disparaît.");
-                    break;
-                }
+                    {
+                        PartyState.Mp -= PurifyCost;
+                        yield return _hero.CastPose(new Color(0.7f, 0.9f, 1f));
+                        PartyState.Poisoned = false;
+                        yield return Say("Ninjutsu : Purification ! Le poison disparaît.");
+                        break;
+                    }
                 case ActionKind.Potion:
-                {
-                    PartyState.Potions--;
-                    HealHero(PartyState.PotionHeal);
-                    yield return _hero.Flash(new Color(0.4f, 1f, 0.6f), 2);
-                    yield return Say($"Potion ! +{PartyState.PotionHeal} PV");
-                    break;
-                }
+                    {
+                        PartyState.Potions--;
+                        HealHero(PartyState.PotionHeal);
+                        yield return _hero.Flash(new Color(0.4f, 1f, 0.6f), 2);
+                        yield return Say($"Potion ! +{PartyState.PotionHeal} PV");
+                        break;
+                    }
                 case ActionKind.Antidote:
-                {
-                    PartyState.Antidotes--;
-                    PartyState.Poisoned = false;
-                    yield return _hero.Flash(new Color(0.7f, 0.9f, 1f), 2);
-                    yield return Say("Antidote ! Le poison est guéri.");
-                    break;
-                }
+                    {
+                        PartyState.Antidotes--;
+                        PartyState.Poisoned = false;
+                        yield return _hero.Flash(new Color(0.7f, 0.9f, 1f), 2);
+                        yield return Say("Antidote ! Le poison est guéri.");
+                        break;
+                    }
                 case ActionKind.Ether:
-                {
-                    PartyState.Ethers--;
-                    PartyState.RestoreMp(PartyState.EtherRestore);
-                    yield return _hero.Flash(PixelGUI.MpColor, 2);
-                    yield return Say($"Éther ! +{PartyState.EtherRestore} PM");
-                    break;
-                }
+                    {
+                        PartyState.Ethers--;
+                        PartyState.RestoreMp(PartyState.EtherRestore);
+                        yield return _hero.Flash(PixelGUI.MpColor, 2);
+                        yield return Say($"Éther ! +{PartyState.EtherRestore} PM");
+                        break;
+                    }
             }
         }
 
@@ -421,7 +486,7 @@ namespace AdventurersGuild
                 if (GameInput.Confirm) ChooseGameOver(_gameOverCursor);
                 return;
             }
-            if (_phase != Phase.Command) return;
+            if (_phase != Phase.Command || TeamMode) return;
 
             int count = CurrentOptionCount();
             if (GameInput.Up) _cursor = (_cursor - 1 + count) % count;
@@ -520,6 +585,7 @@ namespace AdventurersGuild
             }
 
             if (_phase == Phase.Defeat) { DrawGameOver(vw); return; }
+            if (TeamMode) { DrawTeamModeHud(vw); return; }
 
             // message en haut
             if (!string.IsNullOrEmpty(_message))
@@ -555,6 +621,35 @@ namespace AdventurersGuild
 
             // menu de commandes (centre)
             if (_phase == Phase.Command) DrawCommandMenu(leftW + 12, panelY, rx - leftW - 18, panelH);
+        }
+
+        /// <summary>Affichage léger quand on utilise le menu de l'équipe : message, statut, vie des ennemis.</summary>
+        private void DrawTeamModeHud(float vw)
+        {
+            if (!string.IsNullOrEmpty(_message))
+            {
+                PixelGUI.Window(new Rect(10, 8, vw - 20, 34));
+                PixelGUI.Text(new Rect(20, 13, vw - 40, 26), _message, 14, null, TextAnchor.MiddleCenter);
+            }
+
+            const float w = 170f;
+            float x = vw - w - 8, y = 48;
+            PixelGUI.Window(new Rect(x, y, w, 58));
+            string status = PartyState.Poisoned ? "  <color=#9cff5a>Poison</color>" : _sleepTurns > 0 ? "  <color=#ffb0f0>Charme</color>" : "";
+            PixelGUI.Text(new Rect(x + 8, y + 3, w - 12, 16), $"{PartyState.HeroName}  Nv {PartyState.Level}{status}", 11);
+            float ratio = (float)PartyState.Hp / PartyState.MaxHp;
+            PixelGUI.Text(new Rect(x + 8, y + 19, 76, 14), $"PV {PartyState.Hp}/{PartyState.MaxHp}", 10);
+            PixelGUI.Bar(new Rect(x + 84, y + 23, w - 92, 6), ratio, ratio < 0.3f ? PixelGUI.HpLow : PixelGUI.HpColor);
+            PixelGUI.Text(new Rect(x + 8, y + 35, 76, 14), $"PM {PartyState.Mp}/{PartyState.MaxMp}", 10);
+            PixelGUI.Bar(new Rect(x + 84, y + 39, w - 92, 6), (float)PartyState.Mp / PartyState.MaxMp, PixelGUI.MpColor);
+
+            foreach (BattleUnit e in _enemies)
+            {
+                if (!e.IsAlive) continue;
+                Vector2 v = PixelGUI.WorldToVirtual(e.HeadPosition);
+                PixelGUI.Text(new Rect(v.x - 50, v.y - 26, 100, 14), e.DisplayName, 10, null, TextAnchor.MiddleCenter);
+                PixelGUI.Bar(new Rect(v.x - 22, v.y - 11, 44, 6), (float)e.Hp / e.MaxHp, PixelGUI.HpLow);
+            }
         }
 
         private void DrawCommandMenu(float x, float y, float w, float h)
