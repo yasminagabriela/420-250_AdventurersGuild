@@ -4,11 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class BattleTrigger : MonoBehaviour
 {
+    [SerializeField] private BattleTheme theme;
     [SerializeField] private string enemyId = "gloob_1";
     [SerializeField] private string battleSceneName = "BattleScene";
     [SerializeField] private Animator animator;
     [SerializeField] private EnemyPatrol patrol;
     [SerializeField] private float attackDelay = 0.6f;
+
 
     private bool _triggered;
 
@@ -37,8 +39,10 @@ public class BattleTrigger : MonoBehaviour
         if (controller != null) controller.enabled = false;
 
         BattleContext.EnemyId = enemyId;
+        BattleContext.Theme = theme;
         BattleContext.PlayerReturnPosition = player.transform.position;
         BattleContext.HasReturnPosition = true;
+        BattleContext.ReturnSceneName = SceneManager.GetActiveScene().name;
 
         animator.SetTrigger("Attack");
         yield return new WaitForSeconds(attackDelay);
