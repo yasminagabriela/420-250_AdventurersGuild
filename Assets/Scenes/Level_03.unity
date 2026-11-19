@@ -4990,6 +4990,7 @@ GameObject:
   - component: {fileID: 696994722}
   - component: {fileID: 696994723}
   - component: {fileID: 696994724}
+  - component: {fileID: 696994725}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5342,6 +5343,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &696994725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696994716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc7e97446f4773469d54bee9a1e032d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::HealthManager
+  maxHealth: 12
+  currentHealth: 0
 --- !u!1001 &970778176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5427,6 +5442,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4999377120159075789, guid: c20ef13dc20a7c94a9df943aa03421aa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 970778184}
+    - targetCorrespondingSourceObject: {fileID: 4999377120159075789, guid: c20ef13dc20a7c94a9df943aa03421aa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 970778189}
   m_SourcePrefab: {fileID: 100100000, guid: c20ef13dc20a7c94a9df943aa03421aa, type: 3}
 --- !u!1 &970778177 stripped
 GameObject:
@@ -5493,6 +5511,20 @@ MonoBehaviour:
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
   useBlendTrees: 0
+--- !u!114 &970778189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970778177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc7e97446f4773469d54bee9a1e032d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::HealthManager
+  maxHealth: 12
+  currentHealth: 0
 --- !u!1 &1244729492
 GameObject:
   m_ObjectHideFlags: 0
