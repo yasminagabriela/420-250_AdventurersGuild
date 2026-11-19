@@ -36,7 +36,6 @@ public class NPCInteraction : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("nearby: " + playerNearby);
         if (!playerNearby || !Keyboard.current.eKey.wasPressedThisFrame) return;
 
         if (!isTalking)
