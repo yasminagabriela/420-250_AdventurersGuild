@@ -7,7 +7,7 @@ public class HealthManager : MonoBehaviour
     public int currentHealth;
     public event Action<HealthManager> OnDied;
 
-    void Start()
+    void Awake()
     {
         currentHealth = maxHealth;
     }
@@ -19,11 +19,12 @@ public class HealthManager : MonoBehaviour
         currentHealth = Health.ApplyDamage(currentHealth, damage);
 
         if (currentHealth == 0) OnDied?.Invoke(this);
-
     }
 
     public void Heal(int amount)
     {
+        if (currentHealth == 0) return;
+
         currentHealth = Health.Heal(currentHealth, amount, maxHealth);
     }
 }
