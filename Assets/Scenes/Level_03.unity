@@ -5357,6 +5357,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::HealthManager
   maxHealth: 12
   currentHealth: 0
+--- !u!1 &873104806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 873104807}
+  m_Layer: 0
+  m_Name: WP_2
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &873104807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873104806}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 879410496}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &879410495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 879410496}
+  m_Layer: 0
+  m_Name: Waypoints_Ennemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &879410496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879410495}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.47807, y: -0.4139, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1244500147}
+  - {fileID: 873104807}
+  - {fileID: 1135512728}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &970778176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5367,11 +5432,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 240452298992518530, guid: c20ef13dc20a7c94a9df943aa03421aa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.1607928
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 240452298992518530, guid: c20ef13dc20a7c94a9df943aa03421aa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.948035
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 240452298992518530, guid: c20ef13dc20a7c94a9df943aa03421aa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5503,13 +5568,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e70a1312199d5934da23324c4709d416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::EnemyPatrol
-  waypoints: []
+  waypoints:
+  - {fileID: 1244500147}
+  - {fileID: 873104807}
+  - {fileID: 1135512728}
   moveSpeed: 2
   waitTime: 0.5
   pingPong: 1
-  body: {fileID: 0}
-  animator: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  body: {fileID: 970778190}
+  animator: {fileID: 970778178}
+  spriteRenderer: {fileID: 970778192}
   useBlendTrees: 0
 --- !u!114 &970778189
 MonoBehaviour:
@@ -5525,6 +5593,78 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::HealthManager
   maxHealth: 12
   currentHealth: 0
+--- !u!50 &970778190 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 3275292806937358340, guid: c20ef13dc20a7c94a9df943aa03421aa, type: 3}
+  m_PrefabInstance: {fileID: 970778176}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &970778192 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5014466290041338271, guid: c20ef13dc20a7c94a9df943aa03421aa, type: 3}
+  m_PrefabInstance: {fileID: 970778176}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1135512727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1135512728}
+  m_Layer: 0
+  m_Name: WP_3
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1135512728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135512727}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 879410496}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1244500146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1244500147}
+  m_Layer: 0
+  m_Name: WP_1
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1244500147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244500146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 879410496}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1244729492
 GameObject:
   m_ObjectHideFlags: 0
@@ -24689,3 +24829,4 @@ SceneRoots:
   - {fileID: 1244729494}
   - {fileID: 1810428359}
   - {fileID: 1481295734}
+  - {fileID: 879410496}
