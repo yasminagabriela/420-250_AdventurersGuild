@@ -3,7 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class HealthManagerTests
+public class HealthTests
 {
     [Test]
     public void TestApplyDamageWhenHealthRemains()
