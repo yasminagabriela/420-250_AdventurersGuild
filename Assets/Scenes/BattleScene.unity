@@ -697,6 +697,58 @@ MeshRenderer:
   m_SortingOrder: 12
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1126535644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1126535646}
+  - component: {fileID: 1126535645}
+  m_Layer: 0
+  m_Name: BattleController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1126535645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126535644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16fec18b8d2996142a62a36458684984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::BattleController
+  menu: {fileID: 800195141}
+  player: {fileID: 1453264566}
+  enemy: {fileID: 1695164602}
+  playerAnimator: {fileID: 1453264565}
+  attackDamage: 3
+  damageDelay: 0.4
+  attackDuration: 0.85
+  healAmount: 4
+--- !u!4 &1126535646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126535644}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.25524, y: 1.26674, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1207040738
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,10 +804,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.13450292
-    y: 0.11702127
-    width: 0.73099416
-    height: 0.7659574
+    x: 0.19315404
+    y: 0.23837209
+    width: 0.61124694
+    height: 0.5232558
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1233,6 +1285,7 @@ GameObject:
   - component: {fileID: 1453264564}
   - component: {fileID: 1453264563}
   - component: {fileID: 1453264565}
+  - component: {fileID: 1453264566}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1336,6 +1389,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1453264566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453264562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc7e97446f4773469d54bee9a1e032d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::HealthManager
+  maxHealth: 12
+  currentHealth: 12
 --- !u!1 &1695164601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,3 +1521,4 @@ SceneRoots:
   - {fileID: 875391477}
   - {fileID: 853651052}
   - {fileID: 1695164604}
+  - {fileID: 1126535646}
