@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2335df50def17548a98bb4ccaa86e9c, type: 3}
   m_Name: EnemyData_Yasmina
   m_EditorClassIdentifier: GameScripts::EnemyData
-  enemyName: Ennemi
-  battleSprite: {fileID: 0}
+  enemyName: Gloob
+  battleSprite: {fileID: 21300000, guid: e7931fd86e881e04a9bfb68aab6f5d26, type: 3}
   maxHealth: 12
   attackDamage: 2
