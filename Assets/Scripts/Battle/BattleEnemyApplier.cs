@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class BattleEnemyApplier : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private SpriteRenderer enemyRenderer;
+    [SerializeField] private HealthManager enemyHealth;
+    [SerializeField] private EnemyData fallbackEnemy;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        EnemyData data = BattleContext.Enemy != null ? BattleContext.Enemy : fallbackEnemy;
+        if (data == null) return;
+
+        if (data.battleSprite != null)
+            enemyRenderer.sprite = data.battleSprite;
+
+        enemyHealth.maxHealth = data.maxHealth;
     }
 }
