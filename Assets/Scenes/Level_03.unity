@@ -5554,8 +5554,8 @@ MonoBehaviour:
   enemyId: Ennemy_1
   battleSceneName: BattleScene
   animator: {fileID: 970778178}
-  patrol: {fileID: 0}
-  attackDelay: 0.6
+  patrol: {fileID: 970778184}
+  attackDelay: 0.3
 --- !u!114 &970778184
 MonoBehaviour:
   m_ObjectHideFlags: 0
