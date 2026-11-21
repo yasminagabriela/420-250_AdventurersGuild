@@ -36,6 +36,7 @@ public class NPCInteraction : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("nearby: " + playerNearby);
         if (!playerNearby || !Keyboard.current.eKey.wasPressedThisFrame) return;
 
         if (!isTalking)
@@ -46,6 +47,8 @@ public class NPCInteraction : MonoBehaviour
 
     private void StartTalking()
     {
+        if (lines.Length == 0) 
+            return;
         isTalking = true;
         lineIndex = 0;
         animator.SetBool("IsTalking", true);
