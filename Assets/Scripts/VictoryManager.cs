@@ -26,6 +26,6 @@ public class VictoryManager : MonoBehaviour
         if (next < SceneManager.sceneCountInBuildSettings)
             SceneManager.LoadScene(next);
         else
-            Debug.Log("No next level in the Build Profiles scene list.");
+            SceneManager.LoadScene(1);
     }
 }
