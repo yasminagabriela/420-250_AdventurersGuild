@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
-    public int maxHealth = 12;
+    public int maxHealth = 7;
     public int currentHealth;
     public event Action<HealthManager> OnDied;
 
