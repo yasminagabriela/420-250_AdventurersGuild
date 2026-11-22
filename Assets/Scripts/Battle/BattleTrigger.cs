@@ -15,7 +15,6 @@ public class BattleTrigger : MonoBehaviour
     private bool _triggered;
 
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

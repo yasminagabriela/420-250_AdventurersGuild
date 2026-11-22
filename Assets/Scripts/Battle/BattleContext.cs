@@ -9,6 +9,7 @@ public static class BattleContext
     public static readonly HashSet<string> DefeatedEnemies = new HashSet<string>();
     public static BattleTheme Theme;
     public static string ReturnSceneName;
+    public static float IgnoreBattlesUntil;
 
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -19,6 +20,7 @@ public static class BattleContext
         Theme = null;
         HasReturnPosition = false;
         PlayerReturnPosition = Vector3.zero;
+        IgnoreBattlesUntil = 0f;
         DefeatedEnemies.Clear();
     }
 }
