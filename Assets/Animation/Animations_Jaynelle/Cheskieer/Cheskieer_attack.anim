@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Demon_hurt
+  m_Name: Cheskieer_attack
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -6707664879598872819, guid: 59278aaa7c8e28a49925a1799a3f2345, type: 3}
-    - time: 0.016666668
-      value: {fileID: -8394124059130694656, guid: 59278aaa7c8e28a49925a1799a3f2345, type: 3}
-    - time: 0.033333335
-      value: {fileID: -3504678593788907059, guid: 59278aaa7c8e28a49925a1799a3f2345, type: 3}
-    - time: 0.05
-      value: {fileID: -2938837906633963832, guid: 59278aaa7c8e28a49925a1799a3f2345, type: 3}
+      value: {fileID: -1688738931674973769, guid: 08b2e8ad37561c447bef7a21ca1cae91, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,16 +44,13 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -6707664879598872819, guid: 59278aaa7c8e28a49925a1799a3f2345, type: 3}
-    - {fileID: -8394124059130694656, guid: 59278aaa7c8e28a49925a1799a3f2345, type: 3}
-    - {fileID: -3504678593788907059, guid: 59278aaa7c8e28a49925a1799a3f2345, type: 3}
-    - {fileID: -2938837906633963832, guid: 59278aaa7c8e28a49925a1799a3f2345, type: 3}
+    - {fileID: -1688738931674973769, guid: 08b2e8ad37561c447bef7a21ca1cae91, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.06666667
+    m_StopTime: 0.016666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
