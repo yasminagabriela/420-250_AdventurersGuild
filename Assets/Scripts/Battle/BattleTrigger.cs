@@ -12,31 +12,23 @@ public class BattleTrigger : MonoBehaviour
     [SerializeField] private float attackDelay = 0.6f;
     [SerializeField] private EnemyData enemyData;
  
-
     private bool _triggered;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
         if (BattleContext.DefeatedEnemies.Contains(enemyId))
             gameObject.SetActive(false);
-
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (Time.time < BattleContext.IgnoreBattlesUntil) return;
         if (_triggered || !other.CompareTag("Player")) return;
-        _triggered = true;
-        StartCoroutine(StartBattle(other));
-
-        if (_triggered || !other.CompareTag("Player")) return;
         if (Time.timeSinceLevelLoad < BattleContext.TriggerGraceSeconds) return; // ajout Talyssa
+
         _triggered = true;
         StartCoroutine(StartBattle(other));
     }
-
 
     private IEnumerator StartBattle(Collider2D player)
     {
@@ -49,6 +41,7 @@ public class BattleTrigger : MonoBehaviour
         BattleContext.Theme = theme;
         BattleContext.PlayerReturnPosition = player.transform.position;
         BattleContext.HasReturnPosition = true;
+        BattleContext.ReturnSceneName = SceneManager.GetActiveScene().name;
 
         animator.SetTrigger("Attack");
         yield return new WaitForSeconds(attackDelay);
