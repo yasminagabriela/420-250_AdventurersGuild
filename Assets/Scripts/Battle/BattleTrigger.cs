@@ -10,10 +10,10 @@ public class BattleTrigger : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private EnemyPatrol patrol;
     [SerializeField] private float attackDelay = 0.6f;
-
+    [SerializeField] private EnemyData enemyData;
+ 
 
     private bool _triggered;
-
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,6 +26,11 @@ public class BattleTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (Time.time < BattleContext.IgnoreBattlesUntil) return;
+        if (_triggered || !other.CompareTag("Player")) return;
+        _triggered = true;
+        StartCoroutine(StartBattle(other));
+
         if (_triggered || !other.CompareTag("Player")) return;
         if (Time.timeSinceLevelLoad < BattleContext.TriggerGraceSeconds) return; // ajout Talyssa
         _triggered = true;
@@ -39,6 +44,7 @@ public class BattleTrigger : MonoBehaviour
         PlayerController controller = player.GetComponent<PlayerController>();
         if (controller != null) controller.enabled = false;
 
+        BattleContext.Enemy = enemyData;
         BattleContext.EnemyId = enemyId;
         BattleContext.Theme = theme;
         BattleContext.PlayerReturnPosition = player.transform.position;

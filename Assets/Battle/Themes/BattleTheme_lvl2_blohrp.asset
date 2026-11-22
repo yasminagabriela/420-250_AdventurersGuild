@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61ae8c125f9c0e448278c3a22b3d1dc, type: 3}
+  m_Name: BattleTheme_lvl2_blohrp
+  m_EditorClassIdentifier: GameScripts::BattleTheme
+  background: {fileID: 8191720298563389186, guid: 447148ff1b6ab344f87ed459b3f51eee, type: 3}
+  playerAnimator: {fileID: 9100000, guid: 57a90e6f55c86ca4e9dfd7ffab645ff7, type: 2}
+  playerSprite: {fileID: 0}
+  enemySprite: {fileID: -2236407625717012527, guid: 0783c0366de30ff40b98ec6eaa24bb2c, type: 3}
+  enemyFlipX: 1
+  enemyScale: 4
+  enemyOffset: {x: 1.5, y: 0}
