@@ -3,16 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class HealthBar : MonoBehaviour
 {
-    private const float BarScale = 3f;
+    [SerializeField] private float barScale = 3f;
     private const string BattleSceneName = "BattleScene";
 
     // Position sur l'écran : (0, 0) = bas gauche, (1, 1) = haut droite
     private const float NormalX = 0.08f;
     private const float NormalY = 0.92f;
     private const float BattleX = 0.22f;
-    private const float BattleY = 0.28f;
-    private const float EnemyBattleX = 0.74f;
-    private const float EnemyBattleY = 0.36f;
+    private const float BattleY = 0.30f;
+    private const float EnemyBattleX = 0.75f;
+    private const float EnemyBattleY = 0.55f;
 
     [SerializeField] private HealthManager target;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -27,7 +27,7 @@ public class HealthBar : MonoBehaviour
     {
         _camera = Camera.main;
         spriteRenderer.sortingOrder = 100;
-        transform.localScale = new Vector3(BarScale, BarScale, 1f);
+        transform.localScale = new Vector3(barScale, barScale, 1f);
 
         bool inBattle = SceneManager.GetActiveScene().name == BattleSceneName;
 
