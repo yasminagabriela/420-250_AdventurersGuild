@@ -1062,6 +1062,7 @@ MonoBehaviour:
   animator: {fileID: 1212929564}
   patrol: {fileID: 1212929567}
   attackDelay: 0.6
+  enemyData: {fileID: 11400000, guid: 472c5cb76ebc03d44b1ea5adb1a76cc5, type: 2}
 --- !u!1 &1577765535
 GameObject:
   m_ObjectHideFlags: 0
