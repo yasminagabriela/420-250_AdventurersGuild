@@ -17,5 +17,5 @@ MonoBehaviour:
   playerSprite: {fileID: 0}
   enemySprite: {fileID: -2236407625717012527, guid: 0783c0366de30ff40b98ec6eaa24bb2c, type: 3}
   enemyFlipX: 1
-  enemyScale: 2
+  enemyScale: 4
   enemyOffset: {x: 1.5, y: 0}
