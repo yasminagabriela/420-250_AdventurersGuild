@@ -10,7 +10,8 @@ public class BattleTrigger : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private EnemyPatrol patrol;
     [SerializeField] private float attackDelay = 0.6f;
-
+    [SerializeField] private EnemyData enemyData;
+ 
 
     private bool _triggered;
 
@@ -37,6 +38,7 @@ public class BattleTrigger : MonoBehaviour
         PlayerController controller = player.GetComponent<PlayerController>();
         if (controller != null) controller.enabled = false;
 
+        BattleContext.Enemy = enemyData;
         BattleContext.EnemyId = enemyId;
         BattleContext.Theme = theme;
         BattleContext.PlayerReturnPosition = player.transform.position;

@@ -47,6 +47,8 @@ public class NPCInteraction : MonoBehaviour
 
     private void StartTalking()
     {
+        if (lines.Length == 0) 
+            return;
         isTalking = true;
         lineIndex = 0;
         animator.SetBool("IsTalking", true);
