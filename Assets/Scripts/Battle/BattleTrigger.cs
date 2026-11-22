@@ -26,6 +26,11 @@ public class BattleTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (Time.time < BattleContext.IgnoreBattlesUntil) return;
+        if (_triggered || !other.CompareTag("Player")) return;
+        _triggered = true;
+        StartCoroutine(StartBattle(other));
+
         if (_triggered || !other.CompareTag("Player")) return;
         _triggered = true;
         StartCoroutine(StartBattle(other));
