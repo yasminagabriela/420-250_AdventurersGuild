@@ -83,7 +83,7 @@ public class BattleController : MonoBehaviour
         if (enemyHealth.currentHealth > 0)
         {
             yield return new WaitForSeconds(enemyDelay);
-            playerHealth.TakeDamage(enemyDamage);
+            EnemyAttacks();
         }
 
         _busy = false;
@@ -100,7 +100,7 @@ public class BattleController : MonoBehaviour
         if (playerHealth.currentHealth > lowHealth) _tauntPlayed = false;
 
         yield return new WaitForSeconds(enemyDelay);
-        playerHealth.TakeDamage(enemyDamage);
+        EnemyAttacks();
 
         _busy = false;
     }
@@ -115,6 +115,28 @@ public class BattleController : MonoBehaviour
 
         BattleContext.IgnoreBattlesUntil = Time.time + 2f;
         SceneManager.LoadScene(BattleContext.ReturnSceneName);
-        Debug.Log("Retour prévu vers : " + BattleContext.ReturnSceneName);
+    }
+
+    private void EnemyAttacks()
+    {
+        if (enemyAnimator != null && enemyAnimator.enabled
+            && enemyAnimator.runtimeAnimatorController != null)
+            enemyAnimator.SetTrigger("Attack");
+
+        playerHealth.TakeDamage(enemyDamage);
+
+        bool playerIsLow = playerHealth.currentHealth > 0
+            && playerHealth.currentHealth <= lowHealth
+            && !_tauntPlayed;
+
+        if (playerIsLow)
+        {
+            _tauntPlayed = true;
+            enemySounds.Play(EnemySounds.EnemySoundType.Taunt);
+        }
+        else
+        {
+            enemySounds.Play(EnemySounds.EnemySoundType.Attack);
+        }
     }
 }
