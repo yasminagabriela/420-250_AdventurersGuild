@@ -5,6 +5,7 @@ public class BattleThemeApplier : MonoBehaviour
     [SerializeField] private SpriteRenderer background;
     [SerializeField] private SpriteRenderer enemyRenderer;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private Animator enemyAnimator;
     [SerializeField] private BattleTheme fallbackTheme;
 
     private void Awake()
@@ -27,10 +28,14 @@ public class BattleThemeApplier : MonoBehaviour
         if (theme.enemyOffset != Vector2.zero && enemyRenderer != null)
             enemyRenderer.transform.position += (Vector3)theme.enemyOffset;
 
+        if (theme.enemyAnimator != null && enemyAnimator != null)
+            enemyAnimator.runtimeAnimatorController = theme.enemyAnimator;
+
         if (theme.playerAnimator != null)
         {
             playerAnimator.runtimeAnimatorController = theme.playerAnimator;
         }
+
         else if (theme.playerSprite != null)
         {
             playerAnimator.enabled = false;
