@@ -122,16 +122,23 @@ public class BattleController : MonoBehaviour
         bool animated = enemyAnimator != null && enemyAnimator.runtimeAnimatorController != null;
         float startTime = Time.time;
 
+        // direction : l'ennemi avance vers le joueur, où qu'ils soient placés
+        float dir = -1f;
+        if (player != null && enemy != null)
+            dir = Mathf.Sign(player.transform.position.x - enemy.transform.position.x);
+        float lunge = dir * lungeDistance;
+
+        if (animated)
+            enemyAnimator.SetTrigger("Attack");
+        else if (_enemyRenderer != null && data != null && data.attackSprite != null)
+            _enemyRenderer.sprite = data.attackSprite;
+
+        yield return StartCoroutine(MoveEnemy(lunge, 0.15f));
+
         if (animated)
         {
-            enemyAnimator.SetTrigger("Attack");
-            yield return new WaitForSeconds(enemyHitDelay);
-        }
-        else
-        {
-            if (_enemyRenderer != null && data != null && data.attackSprite != null)
-                _enemyRenderer.sprite = data.attackSprite;
-            yield return StartCoroutine(MoveEnemy(-lungeDistance, 0.15f));
+            float wait = enemyHitDelay - (Time.time - startTime);
+            if (wait > 0f) yield return new WaitForSeconds(wait);
         }
 
         // effet de slime + dégâts + le joueur clignote
@@ -151,16 +158,17 @@ public class BattleController : MonoBehaviour
         yield return new WaitForSeconds(effectDuration);
         if (effectRenderer != null) effectRenderer.enabled = false;
 
+        // retour à la place de départ
+        yield return StartCoroutine(MoveEnemy(-lunge, 0.15f));
+
         if (animated)
         {
             float remaining = enemyAttackDuration - (Time.time - startTime);
             if (remaining > 0f) yield return new WaitForSeconds(remaining);
         }
-        else
+        else if (_enemyRenderer != null && _idleSprite != null)
         {
-            yield return StartCoroutine(MoveEnemy(lungeDistance, 0.15f));
-            if (_enemyRenderer != null && _idleSprite != null)
-                _enemyRenderer.sprite = _idleSprite;
+            _enemyRenderer.sprite = _idleSprite;
         }
 
         yield return new WaitForSeconds(0.3f);

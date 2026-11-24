@@ -15,3 +15,5 @@ MonoBehaviour:
   background: {fileID: 21300000, guid: 0dcf28c86169d8447976523f14999509, type: 3}
   playerAnimator: {fileID: 9100000, guid: f37edd09c88b0be44935058e34ff30e6, type: 2}
   playerSprite: {fileID: 0}
+  playerPosition: {x: 0, y: 0}
+  enemyPosition: {x: 0, y: 0}
