@@ -5,6 +5,9 @@ public class EnemyData : ScriptableObject
 {
     public string enemyName = "Ennemi";
     public Sprite battleSprite;
+    public Sprite attackSprite;
+    public Sprite attackEffectSprite;
+    public RuntimeAnimatorController animatorController;
     public int maxHealth = 12;
     public int attackDamage = 2;
 }

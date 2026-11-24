@@ -5,15 +5,21 @@ public class BattleEnemyApplier : MonoBehaviour
     [SerializeField] private SpriteRenderer enemyRenderer;
     [SerializeField] private HealthManager enemyHealth;
     [SerializeField] private EnemyData fallbackEnemy;
+    [SerializeField] private Animator enemyAnimator;
+
+    public EnemyData Data { get; private set; }
 
     private void Awake()
     {
-        EnemyData data = BattleContext.Enemy != null ? BattleContext.Enemy : fallbackEnemy;
-        if (data == null) return;
+        Data = BattleContext.Enemy != null ? BattleContext.Enemy : fallbackEnemy;
+        if (Data == null) return;
 
-        if (data.battleSprite != null)
-            enemyRenderer.sprite = data.battleSprite;
+        if (Data.battleSprite != null)
+            enemyRenderer.sprite = Data.battleSprite;
 
-        enemyHealth.maxHealth = data.maxHealth;
+        if (Data.animatorController != null && enemyAnimator != null)
+            enemyAnimator.runtimeAnimatorController = Data.animatorController;
+
+        enemyHealth.maxHealth = Data.maxHealth;
     }
 }
