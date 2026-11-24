@@ -16,6 +16,9 @@ MonoBehaviour:
   battleSprite: {fileID: 4089636935794680599, guid: 10d387ee58bb85c4c90bd9ca27e5ad9d, type: 3}
   maxHealth: 12
   attackDamage: 2
+  clips:
+  - {fileID: 8300000, guid: eaf2f6267aede6944a744959a070ce58, type: 3}
+  volume: 0.5
   battleScale: 2
   battleOffset: {x: 2, y: 0}
   flipX: 0
