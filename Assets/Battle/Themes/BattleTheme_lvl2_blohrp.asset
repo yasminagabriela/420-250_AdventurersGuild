@@ -15,7 +15,12 @@ MonoBehaviour:
   background: {fileID: 8191720298563389186, guid: 447148ff1b6ab344f87ed459b3f51eee, type: 3}
   playerAnimator: {fileID: 9100000, guid: 57a90e6f55c86ca4e9dfd7ffab645ff7, type: 2}
   playerSprite: {fileID: 0}
+  enemyAnimator: {fileID: 9100000, guid: 078b061fda9a0e54690f9b21f843518d, type: 2}
   enemySprite: {fileID: -2236407625717012527, guid: 0783c0366de30ff40b98ec6eaa24bb2c, type: 3}
   enemyFlipX: 1
-  enemyScale: 4
-  enemyOffset: {x: 1.5, y: 0}
+  enemyScale: 1
+  enemyOffset: {x: 0, y: 0}
+  battleMusic: {fileID: 8300000, guid: 04b16ca72f661a741a0258c5ee4a9c2f, type: 3}
+  attackStartClip: {fileID: 8300000, guid: 093e19de0d67da045b74b22d0d69e1de, type: 3}
+  attackEndClip: {fileID: 8300000, guid: d4fa230562f422f4db2a9a4e1444f1c0, type: 3}
+  healClip: {fileID: 8300000, guid: b90b642d094158249b619dd9391d851f, type: 3}

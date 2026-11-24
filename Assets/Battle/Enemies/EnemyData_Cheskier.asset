@@ -16,6 +16,14 @@ MonoBehaviour:
   battleSprite: {fileID: 4976334082023595143, guid: 6f111b02a3974c9408621d5534a707f4, type: 3}
   maxHealth: 12
   attackDamage: 2
+  clips:
+  - {fileID: 8300000, guid: dd9162eb58ea79c40a2a7372fb823acd, type: 3}
+  - {fileID: 8300000, guid: 7d9342becd489074a85a8f8e157c1ce5, type: 3}
+  - {fileID: 8300000, guid: dce78560b07f0a246ae0e9afe10326f3, type: 3}
+  - {fileID: 8300000, guid: 44be25842b2962840961f437a9daffc5, type: 3}
+  - {fileID: 8300000, guid: 722b1b754273a6345ad3aa3a4b53a127, type: 3}
+  - {fileID: 8300000, guid: 58096ab6e46e8454b85e820901b38cb2, type: 3}
+  volume: 0.5
   battleScale: 2
   battleOffset: {x: 5, y: 2.2}
-  flipX: 1
+  flipX: 0
