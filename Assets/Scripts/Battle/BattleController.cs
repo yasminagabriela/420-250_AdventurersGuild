@@ -11,17 +11,27 @@ public class BattleController : MonoBehaviour
 
     [Header("Attaque")]
     [SerializeField] private int playerDamage = 2;
-    [SerializeField] private float damageDelay = 0.4f;      // moment du coup dans l'animation
-    [SerializeField] private float attackDuration = 0.85f;  // durée totale de l'animation
+    [SerializeField] private float attackDuration = 0.85f;
+    [SerializeField] private PlayerSounds playerSounds;
 
     [Header("Ennemi")]
     [SerializeField] private int enemyDamage = 1;
-    [SerializeField] private float enemyDelay = 1.5f; // secondes avant que l'ennemi attaque
+    [SerializeField] private float enemyDelay = 1.3f;
+    [SerializeField] private Animator enemyAnimator;
+    [SerializeField] private EnemySounds enemySounds;
 
     [Header("Soin")]
     [SerializeField] private int healAmount = 4;
+    [SerializeField] private int lowHealth = 3;
 
     private bool _busy;
+    private bool _lowHealthPlayed;
+    private bool _tauntPlayed;
+
+    private void Start()
+    {
+        enemySounds.Play(EnemySounds.EnemySoundType.CombatStart);
+    }
 
     private void OnEnable()
     {
@@ -51,10 +61,24 @@ public class BattleController : MonoBehaviour
             && playerAnimator.runtimeAnimatorController != null)
             playerAnimator.SetTrigger("Attack");
 
-        yield return new WaitForSeconds(damageDelay);
+        playerSounds?.PlayAttackStart();
+        playerSounds?.PlayAttackEnd();
+
         enemyHealth.TakeDamage(playerDamage);
 
-        yield return new WaitForSeconds(Mathf.Max(0f, attackDuration - damageDelay));
+        if (enemyHealth.currentHealth == 0)
+        {
+            enemySounds.Play(EnemySounds.EnemySoundType.Death);
+        }
+        else if (enemyHealth.currentHealth <= lowHealth && !_lowHealthPlayed)
+        {
+            _lowHealthPlayed = true;
+            enemySounds.Play(EnemySounds.EnemySoundType.LowHealth);
+        }
+        else
+            enemySounds.Play(EnemySounds.EnemySoundType.Hurt);
+
+        yield return new WaitForSeconds(Mathf.Max(0f, attackDuration));
 
         if (enemyHealth.currentHealth > 0)
         {
@@ -72,6 +96,8 @@ public class BattleController : MonoBehaviour
         _busy = true;
 
         playerHealth.Heal(healAmount);
+        playerSounds?.PlayHeal();
+        if (playerHealth.currentHealth > lowHealth) _tauntPlayed = false;
 
         yield return new WaitForSeconds(enemyDelay);
         playerHealth.TakeDamage(enemyDamage);
