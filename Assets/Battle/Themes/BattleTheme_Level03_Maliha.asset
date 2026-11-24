@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61ae8c125f9c0e448278c3a22b3d1dc, type: 3}
   m_Name: BattleTheme_Level03_Maliha
   m_EditorClassIdentifier: GameScripts::BattleTheme
-  background: {fileID: 21300000, guid: ee97b86c0fa525640b42485dfb1c5316, type: 3}
+  background: {fileID: 450828795633703118, guid: 75ddc1a841579c44bb86ed46f70dfe86, type: 3}
   playerAnimator: {fileID: 9100000, guid: 43cfdce4de52d984c82dddbe9f628d03, type: 2}
   playerSprite: {fileID: 0}
+  enemySprite: {fileID: 0}
+  enemyFlipX: 0
+  enemyScale: 2
+  enemyOffset: {x: 2, y: 0}
