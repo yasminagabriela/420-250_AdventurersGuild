@@ -389,6 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3e5804b81b894418bcb05611ed2170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::HealthBar
+  barScale: 3
   target: {fileID: 1695164602}
   spriteRenderer: {fileID: 774548096}
   frames:
@@ -844,6 +845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3e5804b81b894418bcb05611ed2170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::HealthBar
+  barScale: 3
   target: {fileID: 1453264566}
   spriteRenderer: {fileID: 1103443759}
   frames:
@@ -967,7 +969,7 @@ MonoBehaviour:
   damageDelay: 0.4
   attackDuration: 0.85
   enemyDamage: 1
-  enemyDelay: 1.5
+  enemyDelay: 0.6
   healAmount: 4
 --- !u!4 &1126535646
 Transform:

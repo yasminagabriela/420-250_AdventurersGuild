@@ -1,0 +1,23 @@
+{
+    "name": "AdventurersGuild.Level03.Editor",
+    "rootNamespace": "AdventurersGuild.EditorTools",
+    "references": [
+        "AdventurersGuild.Level03",
+        "GameScripts",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Universal.2D.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor",
+        "PS5"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

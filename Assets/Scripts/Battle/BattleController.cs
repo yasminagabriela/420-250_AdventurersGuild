@@ -89,5 +89,6 @@ public class BattleController : MonoBehaviour
 
         BattleContext.IgnoreBattlesUntil = Time.time + 2f;
         SceneManager.LoadScene(BattleContext.ReturnSceneName);
+        Debug.Log("Retour prévu vers : " + BattleContext.ReturnSceneName);
     }
 }

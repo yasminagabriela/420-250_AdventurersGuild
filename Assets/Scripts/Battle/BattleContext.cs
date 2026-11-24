@@ -12,6 +12,7 @@ public static class BattleContext
     public static string ReturnSceneName;
     public static float IgnoreBattlesUntil;
 
+    public static float TriggerGraceSeconds;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetStatics()

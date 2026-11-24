@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6f9306ac15f4740afbaa81c371b002, type: 3}
+  m_Name: Enemy_Sirene
+  m_EditorClassIdentifier: AdventurersGuild.Level03::AdventurersGuild.EnemyData
+  id: sirene
+  displayName: "Sir\xE8ne"
+  isBoss: 1
+  maxHp: 110
+  attack: 10
+  defense: 4
+  agility: 10
+  skillName: "Chant envo\xFBtant"
+  skillType: 2
+  skillChance: 0.3
+  statusChance: 0.45
+  skillPower: 0
+  xpReward: 80
+  goldReward: 100
+  groupMin: 1
+  groupMax: 1
+  idleFrames:
+  - {fileID: 21300000, guid: 8b831406c64154440bdb4097dee6ff05, type: 3}
+  - {fileID: 21300000, guid: 4d7f0081a0e844246b7b85e906a0300c, type: 3}
+  attackFrame: {fileID: 21300000, guid: c7b4787cb2bfcc34492c5e8af52d915e, type: 3}
+  battleScale: 2.6
+  tint: {r: 1, g: 1, b: 1, a: 1}
