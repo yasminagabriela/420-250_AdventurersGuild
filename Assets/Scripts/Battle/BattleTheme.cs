@@ -11,8 +11,15 @@ public class BattleTheme : ScriptableObject
     public Sprite playerSprite;
 
     [Header("Monstre en combat")]
+    public RuntimeAnimatorController enemyAnimator;
     public Sprite enemySprite;
     public bool enemyFlipX;
     public float enemyScale = 1f;
     public Vector2 enemyOffset;
+
+    [Header("Audio en combat")]
+    public AudioClip battleMusic;
+    public AudioClip attackStartClip;
+    public AudioClip attackEndClip;
+    public AudioClip healClip;
 }
