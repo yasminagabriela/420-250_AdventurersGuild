@@ -9,6 +9,8 @@ public class BattleTheme : ScriptableObject
     [Header("Joueur en combat")]
     public RuntimeAnimatorController playerAnimator;
     public Sprite playerSprite;
+    public float playerScale = 1f;
+    public Vector2 playerOffset;
 
     [Header("Monstre en combat")]
     public RuntimeAnimatorController enemyAnimator;

@@ -31,6 +31,14 @@ public class BattleThemeApplier : MonoBehaviour
         if (theme.enemyAnimator != null && enemyAnimator != null)
             enemyAnimator.runtimeAnimatorController = theme.enemyAnimator;
 
+        Transform playerTransform = playerAnimator.transform;
+
+        if (theme.playerScale != 1f)
+            playerTransform.localScale = new Vector3(theme.playerScale, theme.playerScale, 1f);
+
+        if (theme.playerOffset != Vector2.zero)
+            playerTransform.position += (Vector3)theme.playerOffset;
+
         if (theme.playerAnimator != null)
         {
             playerAnimator.runtimeAnimatorController = theme.playerAnimator;
