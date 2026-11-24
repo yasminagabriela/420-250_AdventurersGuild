@@ -2739,7 +2739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3e5804b81b894418bcb05611ed2170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::HealthBar
-  barScale: 3
+  barScale: 2
   target: {fileID: 696994725}
   spriteRenderer: {fileID: 658127653}
   frames:
