@@ -1866,6 +1866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f83d59bba8de95b43a76061a9f5ca381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::VictoryManager
+  victoryPanel: {fileID: 898500081}
   victoryText: {fileID: 636738736}
   restartButton: {fileID: 425286619}
   nextButton: {fileID: 77031378}
@@ -6994,7 +6995,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8814493358850304962, guid: 035342223082238438a0cc12473aef48, type: 3}
+  m_Sprite: {fileID: -6099079829898756965, guid: dc2e66d510123a14190473ba5bf9b554, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
