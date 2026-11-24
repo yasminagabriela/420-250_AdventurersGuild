@@ -2740,7 +2740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScripts::HealthBar
   barScale: 3
-  target: {fileID: 0}
+  target: {fileID: 696994725}
   spriteRenderer: {fileID: 658127653}
   frames:
   - {fileID: 8387958731902010311, guid: d2c8a6d9b1dbdd440af7262124963674, type: 3}
@@ -7283,7 +7283,7 @@ MonoBehaviour:
   animator: {fileID: 970778178}
   patrol: {fileID: 970778184}
   attackDelay: 0.6
-  enemyData: {fileID: 0}
+  enemyData: {fileID: 11400000, guid: 2fee5aeb5b4a25240b859b799a6c9914, type: 2}
 --- !u!114 &970778184
 MonoBehaviour:
   m_ObjectHideFlags: 0
