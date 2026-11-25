@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1042394001258937627}
   - component: {fileID: 8870650424652310895}
   - component: {fileID: 6013940770101589287}
+  - component: {fileID: 420651357422131833}
   m_Layer: 0
   m_Name: Player_Ninja
   m_TagString: Player
@@ -232,6 +233,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fa05b54f38ca7ec4e9903dc85b272c92, type: 2}
   - {fileID: 11400000, guid: c738137d4b3be3942879b6a7682dc880, type: 2}
   feetOffset: {x: 0, y: 0, z: 0}
+  reverseFlipDirection: 0
 --- !u!114 &6013940770101589287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,3 +247,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScripts::SpawnPoint
   player: {fileID: 829500696902804468}
+--- !u!114 &420651357422131833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716938399554194290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc7e97446f4773469d54bee9a1e032d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::HealthManager
+  maxHealth: 7
+  currentHealth: 0
+  isPlayer: 1

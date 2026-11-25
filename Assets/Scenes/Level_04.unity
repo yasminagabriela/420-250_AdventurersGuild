@@ -962,6 +962,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 829500696902804468, guid: a2168e8f394433842a31b677d25d89bf, type: 3}
   m_PrefabInstance: {fileID: 261793136}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &261793138 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 420651357422131833, guid: a2168e8f394433842a31b677d25d89bf, type: 3}
+  m_PrefabInstance: {fileID: 261793136}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc7e97446f4773469d54bee9a1e032d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::HealthManager
 --- !u!1001 &264599443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2437,7 +2448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScripts::HealthBar
   barScale: 3
-  target: {fileID: 0}
+  target: {fileID: 261793138}
   spriteRenderer: {fileID: 821624658}
   frames:
   - {fileID: 8387958731902010311, guid: d2c8a6d9b1dbdd440af7262124963674, type: 3}
@@ -2517,7 +2528,7 @@ Transform:
   m_GameObject: {fileID: 821624656}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.3, y: -2.1, z: 0}
+  m_LocalPosition: {x: 28.2, y: 6.99, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
