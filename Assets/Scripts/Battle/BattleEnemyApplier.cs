@@ -5,23 +5,29 @@ public class BattleEnemyApplier : MonoBehaviour
     [SerializeField] private SpriteRenderer enemyRenderer;
     [SerializeField] private HealthManager enemyHealth;
     [SerializeField] private EnemyData fallbackEnemy;
+    [SerializeField] private Animator enemyAnimator;
+
+    public EnemyData Data { get; private set; }
 
     private void Awake()
     {
-        EnemyData data = BattleContext.Enemy != null ? BattleContext.Enemy : fallbackEnemy;
-        if (data == null) return;
+        Data = BattleContext.Enemy != null ? BattleContext.Enemy : fallbackEnemy;
+        if (Data == null) return;
 
-        if (data.battleSprite != null)
-            enemyRenderer.sprite = data.battleSprite;
+        if (Data.battleSprite != null)
+            enemyRenderer.sprite = Data.battleSprite;
 
-        if (data.battleScale != 1f)
-            enemyRenderer.transform.localScale *= data.battleScale;
+        if (Data.animatorController != null && enemyAnimator != null)
+            enemyAnimator.runtimeAnimatorController = Data.animatorController;
 
-        enemyRenderer.transform.position += (Vector3)data.battleOffset;
+        if (Data.battleScale != 1f)
+            enemyRenderer.transform.localScale *= Data.battleScale;
 
-        if (data.flipX)
+        enemyRenderer.transform.position += (Vector3)Data.battleOffset;
+
+        if (Data.flipX)
             enemyRenderer.flipX = !enemyRenderer.flipX;
 
-        enemyHealth.maxHealth = data.maxHealth;
+        enemyHealth.maxHealth = Data.maxHealth;
     }
 }

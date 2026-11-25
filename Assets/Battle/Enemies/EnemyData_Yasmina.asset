@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::EnemyData
   enemyName: Gloob
   battleSprite: {fileID: 21300000, guid: e7931fd86e881e04a9bfb68aab6f5d26, type: 3}
+  attackSprite: {fileID: 21300000, guid: 2994433f26bdee14fa383a0f2f8e9173, type: 3}
+  attackEffectSprite: {fileID: 21300000, guid: 59e9e2f54a80a544593492ea31705e43, type: 3}
+  animatorController: {fileID: 9100000, guid: 7125e410ae3a700419a5b59bca8fd35d, type: 2}
   maxHealth: 12
   attackDamage: 2

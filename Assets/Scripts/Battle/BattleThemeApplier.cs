@@ -43,7 +43,6 @@ public class BattleThemeApplier : MonoBehaviour
         {
             playerAnimator.runtimeAnimatorController = theme.playerAnimator;
         }
-
         else if (theme.playerSprite != null)
         {
             playerAnimator.enabled = false;
