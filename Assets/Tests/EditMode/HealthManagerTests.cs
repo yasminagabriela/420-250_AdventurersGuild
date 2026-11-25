@@ -1,122 +1,168 @@
-using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 public class HealthManagerTests
 {
     [Test]
-    public void TestApplyDamageWhenHealthRemains()
+    public void TestTakeDamageReducesCurrentHealth()
     {
         // Arrange
-        const int currentHealth = 10;
-        const int damage = 4;
-        const int expectedHealth = 6;
+        var gameObject = new GameObject("TestHealthManager");
 
-        // Act
-        int actualHealth = Health.ApplyDamage(currentHealth, damage);
+        try
+        {
+            var manager = gameObject.AddComponent<HealthManager>();
+            manager.maxHealth = 10;
+            manager.currentHealth = 7;
+            const int damage = 4;
+            const int expectedHealth = 3;
 
-        // Assert
-        Assert.AreEqual(expectedHealth, actualHealth,
-            $"ApplyDamage({currentHealth}, {damage}) devrait retourner {expectedHealth} mais retourne {actualHealth}.");
+            // Act
+            manager.TakeDamage(damage);
+
+            // Assert
+            Assert.AreEqual(expectedHealth, manager.currentHealth,
+                $"TakeDamage({damage}) devrait laisser {expectedHealth} de vie mais laisse {manager.currentHealth}.");
+        }
+        finally
+        {
+            GameObject.DestroyImmediate(gameObject);
+        }
     }
 
     [Test]
-    public void TestApplyDamageWhenDamageIsZero()
+    public void TestOnDiedIsNotInvokedWhenHealthRemains()
     {
         // Arrange
-        const int currentHealth = 10;
-        const int damage = 0;
-        const int expectedHealth = 10;
+        var gameObject = new GameObject("TestHealthManager");
 
-        // Act
-        int actualHealth = Health.ApplyDamage(currentHealth, damage);
+        try
+        {
+            var manager = gameObject.AddComponent<HealthManager>();
+            manager.maxHealth = 10;
+            manager.currentHealth = 10;
+            int diedCount = 0;
+            manager.OnDied += (m) => diedCount++;
+            const int expectedCount = 0;
 
-        // Assert
-        Assert.AreEqual(expectedHealth, actualHealth,
-            $"ApplyDamage({currentHealth}, {damage}) devrait retourner {expectedHealth} mais retourne {actualHealth}.");
+            // Act
+            manager.TakeDamage(4);
+
+            // Assert
+            Assert.AreEqual(expectedCount, diedCount,
+                $"OnDied ne devrait pas être appelé quand il reste de la vie, mais a été appelé {diedCount} fois.");
+        }
+        finally
+        {
+            GameObject.DestroyImmediate(gameObject);
+        }
     }
 
     [Test]
-    public void TestApplyDamageWhenDamageEqualsHealth()
+    public void TestOnDiedIsInvokedOnlyOnce()
     {
         // Arrange
-        const int currentHealth = 7;
-        const int damage = 7;
-        const int expectedHealth = 0;
+        var gameObject = new GameObject("TestHealthManager");
 
-        // Act
-        int actualHealth = Health.ApplyDamage(currentHealth, damage);
+        try
+        {
+            var manager = gameObject.AddComponent<HealthManager>();
+            manager.maxHealth = 10;
+            manager.currentHealth = 10;
+            int diedCount = 0;
+            manager.OnDied += (m) => diedCount++;
+            const int expectedCount = 1;
 
-        // Assert
-        Assert.AreEqual(expectedHealth, actualHealth,
-            $"ApplyDamage({currentHealth}, {damage}) devrait retourner {expectedHealth} mais retourne {actualHealth}.");
+            // Act
+            manager.TakeDamage(10);
+            manager.TakeDamage(5);
+
+            // Assert
+            Assert.AreEqual(expectedCount, diedCount,
+                $"OnDied devrait être appelé {expectedCount} fois mais a été appelé {diedCount} fois.");
+        }
+        finally
+        {
+            GameObject.DestroyImmediate(gameObject);
+        }
     }
 
     [Test]
-    public void TestApplyDamageWhenDamageExceedsHealth()
+    public void TestHealIncreasesCurrentHealth()
     {
         // Arrange
-        const int currentHealth = 2;
-        const int damage = 8;
-        const int expectedHealth = 0;
+        var gameObject = new GameObject("TestHealthManager");
 
-        // Act
-        int actualHealth = Health.ApplyDamage(currentHealth, damage);
+        try
+        {
+            var manager = gameObject.AddComponent<HealthManager>();
+            manager.maxHealth = 10;
+            manager.currentHealth = 5;
+            const int amount = 3;
+            const int expectedHealth = 8;
 
-        // Assert
-        Assert.AreEqual(expectedHealth, actualHealth,
-            $"ApplyDamage({currentHealth}, {damage}) devrait retourner {expectedHealth} mais retourne {actualHealth}.");
+            // Act
+            manager.Heal(amount);
+
+            // Assert
+            Assert.AreEqual(expectedHealth, manager.currentHealth,
+                $"Heal({amount}) devrait donner {expectedHealth} mais donne {manager.currentHealth}.");
+        }
+        finally
+        {
+            GameObject.DestroyImmediate(gameObject);
+        }
     }
 
     [Test]
-    public void TestHealWhenHealthIsBelowMax()
+    public void TestHealDoesNotExceedMaxHealth()
     {
         // Arrange
-        const int currentHealth = 5;
-        const int amount = 1;
-        const int maxHealth = 10;
-        const int expectedHealth = 6;
+        var gameObject = new GameObject("TestHealthManager");
 
-        // Act
-        int actualHealth = Health.Heal(currentHealth, amount, maxHealth);
+        try
+        {
+            var manager = gameObject.AddComponent<HealthManager>();
+            manager.maxHealth = 10;
+            manager.currentHealth = 5;
+            const int amount = 20;
+            const int expectedHealth = 10;
 
-        // Assert
-        Assert.AreEqual(expectedHealth, actualHealth,
-            $"Heal({currentHealth}, {amount}, {maxHealth}) devrait retourner {expectedHealth} mais retourne {actualHealth}.");
+            // Act
+            manager.Heal(amount);
+
+            // Assert
+            Assert.AreEqual(expectedHealth, manager.currentHealth,
+                $"Heal({amount}) devrait s'arrêter à {expectedHealth} mais donne {manager.currentHealth}.");
+        }
+        finally
+        {
+            GameObject.DestroyImmediate(gameObject);
+        }
     }
 
     [Test]
-    public void TestHealWhenHealthReachesMax()
+    public void TestHealWhenDeadDoesNotResurrect()
     {
         // Arrange
-        const int currentHealth = 9;
-        const int amount = 1;
-        const int maxHealth = 10;
-        const int expectedHealth = 10;
+        var gameObject = new GameObject("TestHealthManager");
 
-        // Act
-        int actualHealth = Health.Heal(currentHealth, amount, maxHealth);
+        try
+        {
+            var manager = gameObject.AddComponent<HealthManager>();
+            manager.currentHealth = 0;
+            const int expectedHealth = 0;
 
-        // Assert
-        Assert.AreEqual(expectedHealth, actualHealth,
-            $"Heal({currentHealth}, {amount}, {maxHealth}) devrait retourner {expectedHealth} mais retourne {actualHealth}.");
-    }
+            // Act
+            manager.Heal(5);
 
-    [Test]
-    public void TestHealWhenHealingExceedsMax()
-    {
-        // Arrange
-        const int currentHealth = 8;
-        const int amount = 7;
-        const int maxHealth = 10;
-        const int expectedHealth = 10;
-
-        // Act
-        int actualHealth = Health.Heal(currentHealth, amount, maxHealth);
-
-        // Assert
-        Assert.AreEqual(expectedHealth, actualHealth,
-            $"Heal({currentHealth}, {amount}, {maxHealth}) devrait retourner {expectedHealth} mais retourne {actualHealth}.");
+            // Assert
+            Assert.AreEqual(expectedHealth, manager.currentHealth,
+                $"Heal sur un personnage mort devrait garder {expectedHealth} mais donne {manager.currentHealth}.");
+        }
+        finally
+        {
+            GameObject.DestroyImmediate(gameObject);
+        }
     }
 }

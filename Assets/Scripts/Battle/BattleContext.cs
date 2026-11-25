@@ -10,7 +10,9 @@ public static class BattleContext
     public static BattleTheme Theme;
     public static EnemyData Enemy;
     public static string ReturnSceneName;
+    public static float IgnoreBattlesUntil;
 
+    public static float TriggerGraceSeconds;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetStatics()
@@ -21,6 +23,7 @@ public static class BattleContext
         Theme = null;
         HasReturnPosition = false;
         PlayerReturnPosition = Vector3.zero;
+        IgnoreBattlesUntil = 0f;
         DefeatedEnemies.Clear();
     }
 }

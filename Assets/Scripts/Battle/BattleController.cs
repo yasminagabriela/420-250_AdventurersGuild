@@ -5,20 +5,22 @@ using UnityEngine.SceneManagement;
 public class BattleController : MonoBehaviour
 {
     [SerializeField] private BattleMenu menu;
-    [SerializeField] private HealthManager player;
-    [SerializeField] private HealthManager enemy;
+    [SerializeField] private HealthManager playerHealth;
+    [SerializeField] private HealthManager enemyHealth;
     [SerializeField] private Animator playerAnimator;
 
     [Header("Joueur")]
     [SerializeField] private int attackDamage = 3;
     [SerializeField] private int healAmount = 4;
-    [SerializeField] private float damageDelay = 0.4f;
+    [SerializeField] private float damageDelay = 0.4f;           // moment du coup dans l'animation
     [SerializeField] private float attackDuration = 0.85f;
+    [SerializeField] private PlayerSounds playerSounds;
 
     [Header("Ennemi")]
     [SerializeField] private BattleEnemyApplier enemyApplier;
     [SerializeField] private Animator enemyAnimator;
     [SerializeField] private SpriteRenderer effectRenderer;
+    [SerializeField] private EnemySounds enemySounds;
     [SerializeField] private int fallbackEnemyDamage = 2;
     [SerializeField] private float enemyTurnDelay = 0.8f;
     [SerializeField] private float enemyHitDelay = 0.35f;        // moment du coup dans l'animation
@@ -26,38 +28,53 @@ public class BattleController : MonoBehaviour
     [SerializeField] private float lungeDistance = 0.75f;        // si pas d'animation
     [SerializeField] private float effectDuration = 0.4f;
 
+    [Header("Vie basse")]
+    [SerializeField] private int lowHealth = 3;
+
     [Header("Fin du combat")]
     [SerializeField] private float endDelay = 1.5f;
 
     private BattleState _state = BattleState.PlayerTurn;
     private bool _busy;
+    private bool _lowHealthPlayed;
+    private bool _tauntPlayed;
     private SpriteRenderer _enemyRenderer;
     private SpriteRenderer _playerRenderer;
     private Sprite _idleSprite;
 
     // Un objet détruit (vie à 0) compte comme 0 de vie
-    private int PlayerHealth => player != null ? player.currentHealth : 0;
-    private int EnemyHealth => enemy != null ? enemy.currentHealth : 0;
+    private int PlayerHealth => playerHealth != null ? playerHealth.currentHealth : 0;
+    private int EnemyHealth => enemyHealth != null ? enemyHealth.currentHealth : 0;
 
-    private void OnEnable() { menu.Confirmed += OnChoice; }
-    private void OnDisable() { menu.Confirmed -= OnChoice; }
+    private void OnEnable()
+    {
+        menu.Confirmed += OnChoice;
+    }
+
+    private void OnDisable()
+    {
+        menu.Confirmed -= OnChoice;
+    }
 
     private void Start()
     {
-        if (enemy != null)
+        if (enemyHealth != null)
         {
-            _enemyRenderer = enemy.GetComponent<SpriteRenderer>();
+            _enemyRenderer = enemyHealth.GetComponent<SpriteRenderer>();
             if (_enemyRenderer != null) _idleSprite = _enemyRenderer.sprite;
         }
-        if (player != null) _playerRenderer = player.GetComponent<SpriteRenderer>();
+        if (playerHealth != null) _playerRenderer = playerHealth.GetComponent<SpriteRenderer>();
         if (effectRenderer != null) effectRenderer.enabled = false;
 
+        PlayEnemySound(EnemySounds.EnemySoundType.CombatStart);
         Debug.Log("Votre tour");
     }
 
     private void OnChoice(int index)
     {
         if (_state != BattleState.PlayerTurn || _busy) return;
+        if (PlayerHealth == 0 || EnemyHealth == 0) return;
+
         StartCoroutine(PlayerTurn(index));
     }
 
@@ -70,15 +87,24 @@ public class BattleController : MonoBehaviour
             case 0:
                 yield return StartCoroutine(PlayerAttack());
                 break;
+
             case 1:
-                player.Heal(healAmount);
-                Debug.Log($"Joueur : {PlayerHealth}/{player.maxHealth}");
+                if (PlayerHealth >= playerHealth.maxHealth)
+                {
+                    _busy = false;
+                    yield break;            // vie pleine : le tour n'est pas consommé
+                }
+                playerHealth.Heal(healAmount);
+                if (playerSounds != null) playerSounds.PlayHeal();
+                if (PlayerHealth > lowHealth) _tauntPlayed = false;
+                Debug.Log($"Joueur : {PlayerHealth}/{playerHealth.maxHealth}");
                 yield return new WaitForSeconds(0.5f);
                 break;
+
             case 2:
-                Debug.Log("Fuite (pas encore codée)");
+                Flee();
                 _busy = false;
-                yield break;            // la fuite ne consomme pas le tour
+                yield break;                // la fuite ne consomme pas le tour
         }
 
         yield return StartCoroutine(AdvanceTurn());
@@ -91,15 +117,35 @@ public class BattleController : MonoBehaviour
             && playerAnimator.runtimeAnimatorController != null)
             playerAnimator.SetTrigger("Attack");
 
+        if (playerSounds != null)
+        {
+            playerSounds.PlayAttackStart();
+            playerSounds.PlayAttackEnd();
+        }
+
         yield return new WaitForSeconds(damageDelay);
 
-        if (enemy != null)
+        if (enemyHealth != null)
         {
-            enemy.TakeDamage(attackDamage);
+            enemyHealth.TakeDamage(attackDamage);
             Debug.Log($"Ennemi : {EnemyHealth}");
         }
 
-        yield return new WaitForSeconds(attackDuration - damageDelay);
+        if (EnemyHealth == 0)
+        {
+            PlayEnemySound(EnemySounds.EnemySoundType.Death);
+        }
+        else if (EnemyHealth <= lowHealth && !_lowHealthPlayed)
+        {
+            _lowHealthPlayed = true;
+            PlayEnemySound(EnemySounds.EnemySoundType.LowHealth);
+        }
+        else
+        {
+            PlayEnemySound(EnemySounds.EnemySoundType.Hurt);
+        }
+
+        yield return new WaitForSeconds(Mathf.Max(0f, attackDuration - damageDelay));
     }
 
     private IEnumerator AdvanceTurn()
@@ -119,13 +165,14 @@ public class BattleController : MonoBehaviour
 
         EnemyData data = enemyApplier != null ? enemyApplier.Data : BattleContext.Enemy;
         int damage = data != null ? data.attackDamage : fallbackEnemyDamage;
-        bool animated = enemyAnimator != null && enemyAnimator.runtimeAnimatorController != null;
+        bool animated = enemyAnimator != null && enemyAnimator.enabled
+                        && enemyAnimator.runtimeAnimatorController != null;
         float startTime = Time.time;
 
         // direction : l'ennemi avance vers le joueur, où qu'ils soient placés
         float dir = -1f;
-        if (player != null && enemy != null)
-            dir = Mathf.Sign(player.transform.position.x - enemy.transform.position.x);
+        if (playerHealth != null && enemyHealth != null)
+            dir = Mathf.Sign(playerHealth.transform.position.x - enemyHealth.transform.position.x);
         float lunge = dir * lungeDistance;
 
         if (animated)
@@ -141,18 +188,19 @@ public class BattleController : MonoBehaviour
             if (wait > 0f) yield return new WaitForSeconds(wait);
         }
 
-        // effet de slime + dégâts + le joueur clignote
+        // effet de slime + dégâts + son + le joueur clignote
         if (effectRenderer != null && data != null && data.attackEffectSprite != null)
         {
             effectRenderer.sprite = data.attackEffectSprite;
             effectRenderer.enabled = true;
         }
 
-        if (player != null)
+        if (playerHealth != null)
         {
-            player.TakeDamage(damage);
+            playerHealth.TakeDamage(damage);
             Debug.Log($"Joueur : {PlayerHealth}");
         }
+        PlayEnemyAttackSound();
         yield return StartCoroutine(FlashPlayer());
 
         yield return new WaitForSeconds(effectDuration);
@@ -180,21 +228,43 @@ public class BattleController : MonoBehaviour
             Debug.Log("Votre tour");
     }
 
+    private void PlayEnemyAttackSound()
+    {
+        bool playerIsLow = PlayerHealth > 0 && PlayerHealth <= lowHealth && !_tauntPlayed;
+
+        if (playerIsLow)
+        {
+            _tauntPlayed = true;
+            PlayEnemySound(EnemySounds.EnemySoundType.Taunt);
+        }
+        else
+        {
+            PlayEnemySound(EnemySounds.EnemySoundType.Attack);
+        }
+    }
+
+    private void PlayEnemySound(EnemySounds.EnemySoundType type)
+    {
+        if (enemySounds != null) enemySounds.Play(type);
+    }
+
     private IEnumerator MoveEnemy(float dx, float duration)
     {
-        if (enemy == null) yield break;
+        if (enemyHealth == null) yield break;
 
-        Vector3 start = enemy.transform.position;
+        Transform enemyTransform = enemyHealth.transform;
+        Vector3 start = enemyTransform.position;
         Vector3 end = start + new Vector3(dx, 0f, 0f);
         float t = 0f;
 
         while (t < duration)
         {
+            if (enemyHealth == null) yield break;
             t += Time.deltaTime;
-            enemy.transform.position = Vector3.Lerp(start, end, t / duration);
+            enemyTransform.position = Vector3.Lerp(start, end, t / duration);
             yield return null;
         }
-        enemy.transform.position = end;
+        enemyTransform.position = end;
     }
 
     private IEnumerator FlashPlayer()
@@ -229,6 +299,21 @@ public class BattleController : MonoBehaviour
         yield return new WaitForSeconds(endDelay);
 
         if (_state == BattleState.Won && !string.IsNullOrEmpty(BattleContext.ReturnSceneName))
+        {
+            BattleContext.IgnoreBattlesUntil = Time.time + 2f;
             SceneManager.LoadScene(BattleContext.ReturnSceneName);
+        }
+    }
+
+    private void Flee()
+    {
+        if (string.IsNullOrEmpty(BattleContext.ReturnSceneName))
+        {
+            Debug.LogWarning("Aucun niveau de retour : le combat a été lancé seul.");
+            return;
+        }
+
+        BattleContext.IgnoreBattlesUntil = Time.time + 2f;
+        SceneManager.LoadScene(BattleContext.ReturnSceneName);
     }
 }

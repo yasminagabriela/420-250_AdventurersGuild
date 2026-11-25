@@ -3,12 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class VictoryManager : MonoBehaviour
 {
+    public GameObject victoryPanel;
     public GameObject victoryText;
     public GameObject restartButton;
     public GameObject nextButton;
 
     public void Victory()
     {
+        victoryPanel.SetActive(true);
         victoryText.SetActive(true);
         restartButton.SetActive(true);
         nextButton.SetActive(true);

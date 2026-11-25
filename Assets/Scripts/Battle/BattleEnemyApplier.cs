@@ -20,6 +20,14 @@ public class BattleEnemyApplier : MonoBehaviour
         if (Data.animatorController != null && enemyAnimator != null)
             enemyAnimator.runtimeAnimatorController = Data.animatorController;
 
+        if (Data.battleScale != 1f)
+            enemyRenderer.transform.localScale *= Data.battleScale;
+
+        enemyRenderer.transform.position += (Vector3)Data.battleOffset;
+
+        if (Data.flipX)
+            enemyRenderer.flipX = !enemyRenderer.flipX;
+
         enemyHealth.maxHealth = Data.maxHealth;
     }
 }

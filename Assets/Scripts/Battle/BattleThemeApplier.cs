@@ -3,8 +3,9 @@ using UnityEngine;
 public class BattleThemeApplier : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer background;
+    [SerializeField] private SpriteRenderer enemyRenderer;
     [SerializeField] private Animator playerAnimator;
-    [SerializeField] private Transform enemyTransform;
+    [SerializeField] private Animator enemyAnimator;
     [SerializeField] private BattleTheme fallbackTheme;
 
     private void Awake()
@@ -15,6 +16,29 @@ public class BattleThemeApplier : MonoBehaviour
         if (theme.background != null)
             background.sprite = theme.background;
 
+        if (theme.enemySprite != null && enemyRenderer != null)
+            enemyRenderer.sprite = theme.enemySprite;
+
+        if (theme.enemyFlipX && enemyRenderer != null)
+            enemyRenderer.flipX = !enemyRenderer.flipX;
+
+        if (theme.enemyScale != 1f && enemyRenderer != null)
+            enemyRenderer.transform.localScale = new Vector3(theme.enemyScale, theme.enemyScale, 1f);
+
+        if (theme.enemyOffset != Vector2.zero && enemyRenderer != null)
+            enemyRenderer.transform.position += (Vector3)theme.enemyOffset;
+
+        if (theme.enemyAnimator != null && enemyAnimator != null)
+            enemyAnimator.runtimeAnimatorController = theme.enemyAnimator;
+
+        Transform playerTransform = playerAnimator.transform;
+
+        if (theme.playerScale != 1f)
+            playerTransform.localScale = new Vector3(theme.playerScale, theme.playerScale, 1f);
+
+        if (theme.playerOffset != Vector2.zero)
+            playerTransform.position += (Vector3)theme.playerOffset;
+
         if (theme.playerAnimator != null)
         {
             playerAnimator.runtimeAnimatorController = theme.playerAnimator;
@@ -24,12 +48,5 @@ public class BattleThemeApplier : MonoBehaviour
             playerAnimator.enabled = false;
             playerAnimator.GetComponent<SpriteRenderer>().sprite = theme.playerSprite;
         }
-
-        playerAnimator.transform.position =
-            new Vector3(theme.playerPosition.x, theme.playerPosition.y, 0f);
-
-        if (enemyTransform != null)
-            enemyTransform.position =
-                new Vector3(theme.enemyPosition.x, theme.enemyPosition.y, 0f);
     }
 }
