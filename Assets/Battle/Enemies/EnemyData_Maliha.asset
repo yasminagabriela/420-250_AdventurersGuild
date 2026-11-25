@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::EnemyData
   enemyName: Ennemi
   battleSprite: {fileID: 4089636935794680599, guid: 10d387ee58bb85c4c90bd9ca27e5ad9d, type: 3}
+  attackSprite: {fileID: -6572165590209364647, guid: 58568b82b1925ea43aa31b500999e0ee, type: 3}
+  attackEffectSprite: {fileID: 0}
+  animatorController: {fileID: 9100000, guid: 74be59ac8af5f9448a854f7df0f46f27, type: 2}
   maxHealth: 12
   attackDamage: 2
   clips:
