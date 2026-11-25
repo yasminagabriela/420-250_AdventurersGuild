@@ -3,23 +3,21 @@ using UnityEngine.SceneManagement;
 
 namespace AdventurersGuild
 {
-    /// Coffre qui s'ouvre une seule fois et joue un son 
+    /// <summary>Coffre qui s'ouvre une seule fois, joue un son et soigne le joueur.</summary>
     public class TreasureChest : Interactable
     {
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Sprite closedSprite;
         [SerializeField] private Sprite openSprite;
-        [SerializeField] private int potions = 1;
-        [SerializeField] private int antidotes = 1;
-        [SerializeField] private int ethers = 1;
-        [SerializeField] private int gold = 25;
+        [Tooltip("Points de vie redonnés au joueur (HealthManager de l'équipe).")]
+        [SerializeField] private int healAmount = 3;
 
         [Header("Son (BF-17)")]
         [SerializeField] private AudioClip openSound;
         [Range(0f, 1f)][SerializeField] private float volume = 0.8f;
 
         private string Flag => $"chest:{SceneManager.GetActiveScene().name}:{name}";
-        private bool IsOpened => PartyState.Flags.Contains(Flag);
+        private bool IsOpened => UsedFlags.Contains(Flag);
 
         protected override void Start()
         {
@@ -32,21 +30,14 @@ namespace AdventurersGuild
 
         protected override void Interact()
         {
-            PartyState.Flags.Add(Flag);
+            UsedFlags.Add(Flag);
             spriteRenderer.sprite = openSprite;
             PlayOpenSound();
 
-            PartyState.Potions += potions;
-            PartyState.Antidotes += antidotes;
-            PartyState.Ethers += ethers;
-            PartyState.Gold += gold;
+            HealthManager health = PlayerHealth();
+            if (health != null) health.Heal(healAmount);
 
-            var parts = new System.Collections.Generic.List<string>();
-            if (potions > 0) parts.Add($"{potions} Potion(s)");
-            if (antidotes > 0) parts.Add($"{antidotes} Antidote(s)");
-            if (ethers > 0) parts.Add($"{ethers} Éther(s)");
-            if (gold > 0) parts.Add($"{gold} pièces d'or");
-            DialogueBox.Show("", new[] { "Tu ouvres le coffre...", "Tu obtiens : " + string.Join(", ", parts) + " !" });
+            DialogueBox.Show("", new[] { "Tu ouvres le coffre...", "Une potion ! Tu récupères " + healAmount + " PV." });
         }
 
         private void PlayOpenSound()

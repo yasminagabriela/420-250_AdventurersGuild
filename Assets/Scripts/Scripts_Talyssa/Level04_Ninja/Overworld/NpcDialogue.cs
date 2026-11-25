@@ -51,15 +51,14 @@ namespace AdventurersGuild
 
         private void GiveRewardIfAny()
         {
-            if (reward == Reward.None || PartyState.Flags.Contains(RewardFlag)) return;
+            if (reward == Reward.None || UsedFlags.Contains(RewardFlag)) return;
             if (rewardOnlyAfterVictory && !VictoryDone) return;
-            PartyState.Flags.Add(RewardFlag);
-            switch (reward)
-            {
-                case Reward.HealFull: PartyState.RestoreFull(); break;
-                case Reward.TwoPotions: PartyState.Potions += 2; break;
-                case Reward.EtherAndHeal: PartyState.Ethers += 2; PartyState.RestoreFull(); break;
-            }
+            UsedFlags.Add(RewardFlag);
+
+            // Toutes les récompenses soignent le joueur (HealthManager de l'équipe).
+            HealthManager health = PlayerHealth();
+            if (health != null) health.Heal(health.maxHealth);
+
             if (!string.IsNullOrEmpty(rewardMessage)) DialogueBox.Show("", new[] { rewardMessage });
         }
     }
