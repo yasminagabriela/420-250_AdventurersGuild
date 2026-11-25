@@ -2,7 +2,10 @@ using UnityEngine;
 
 namespace AdventurersGuild
 {
-    /// <summary>Petit statut du ninja en haut à gauche pendant l'exploration (issue #6).</summary>
+    /// <summary>
+    /// Titre du niveau + objectif pendant l'exploration (issue #6).
+    /// La barre de vie est enlevée : les PV sont affichés par le HealthBar de l'équipe.
+    /// </summary>
     public class OverworldHud : MonoBehaviour
     {
         [SerializeField] private string levelTitle = "Niveau 4 — La Forêt Lumineuse";
@@ -14,15 +17,6 @@ namespace AdventurersGuild
         private void OnGUI()
         {
             if (DialogueBox.IsOpen) return;
-            const float w = 170f;
-            PixelGUI.Window(new Rect(6, 6, w, 58));
-            string status = PartyState.Poisoned ? "  <color=#9cff5a>Poison</color>" : "";
-            PixelGUI.Text(new Rect(14, 9, w - 16, 16), $"{PartyState.HeroName}  Nv {PartyState.Level}{status}", 11);
-            float ratio = (float)PartyState.Hp / PartyState.MaxHp;
-            PixelGUI.Text(new Rect(14, 25, 70, 14), $"PV {PartyState.Hp}/{PartyState.MaxHp}", 10);
-            PixelGUI.Bar(new Rect(86, 29, w - 92, 6), ratio, ratio < 0.3f ? PixelGUI.HpLow : PixelGUI.HpColor);
-            PixelGUI.Text(new Rect(14, 40, 70, 14), $"PM {PartyState.Mp}/{PartyState.MaxMp}", 10);
-            PixelGUI.Bar(new Rect(86, 44, w - 92, 6), (float)PartyState.Mp / PartyState.MaxMp, PixelGUI.MpColor);
 
             float vw = PixelGUI.VirtualWidth;
             if (Time.timeSinceLevelLoad < titleDuration && !BattleContext.HasReturnPosition)
