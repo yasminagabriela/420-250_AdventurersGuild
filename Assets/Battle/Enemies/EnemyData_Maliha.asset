@@ -17,7 +17,7 @@ MonoBehaviour:
   attackSprite: {fileID: -6572165590209364647, guid: 58568b82b1925ea43aa31b500999e0ee, type: 3}
   attackEffectSprite: {fileID: 0}
   animatorController: {fileID: 9100000, guid: 74be59ac8af5f9448a854f7df0f46f27, type: 2}
-  maxHealth: 12
+  maxHealth: 10
   attackDamage: 2
   clips:
   - {fileID: 8300000, guid: eaf2f6267aede6944a744959a070ce58, type: 3}
