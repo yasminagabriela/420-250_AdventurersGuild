@@ -22,10 +22,14 @@ public class GameOverManager : MonoBehaviour
     {
         if (background == null) return;
 
-        // Le fond de combat du niveau où on vient de perdre (thème de chaque coéquipière)
-        Sprite sprite = BattleContext.Theme != null && BattleContext.Theme.background != null
-            ? BattleContext.Theme.background
-            : fallbackBackground;
+        // 1) fond Game Over du niveau  2) sinon fond de combat du niveau  3) sinon fond par défaut
+        Sprite sprite = fallbackBackground;
+        BattleTheme theme = BattleContext.Theme;
+        if (theme != null)
+        {
+            if (theme.gameOverBackground != null) sprite = theme.gameOverBackground;
+            else if (theme.background != null) sprite = theme.background;
+        }
         if (sprite == null) return;
 
         background.sprite = sprite;

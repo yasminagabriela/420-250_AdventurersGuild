@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1f90ec91894264eaaf5fcdf2939272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::GameOverManager
-  firstLevelName: Level_01
+  firstLevelName: Level_04
   background: {fileID: 790138769}
   fallbackBackground: {fileID: 21300000, guid: 668295661ca5b6d4baaa9ec65d1011f2, type: 3}
   backgroundTint: {r: 0.45, g: 0.45, b: 0.45, a: 1}

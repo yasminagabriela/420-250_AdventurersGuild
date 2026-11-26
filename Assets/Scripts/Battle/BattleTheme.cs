@@ -5,6 +5,8 @@ public class BattleTheme : ScriptableObject
 {
     [Header("Décor")]
     public Sprite background;
+    [Tooltip("Fond de l'écran Game Over pour ce niveau. Vide = même fond que le combat.")]
+    public Sprite gameOverBackground;
 
     [Header("Joueur en combat")]
     public RuntimeAnimatorController playerAnimator;
