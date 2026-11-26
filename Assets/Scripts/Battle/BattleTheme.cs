@@ -28,4 +28,6 @@ public class BattleTheme : ScriptableObject
     public AudioClip attackStartClip;
     public AudioClip attackEndClip;
     public AudioClip healClip;
+    [Tooltip("Son de l'écran Game Over pour ce niveau. Vide = son par défaut de la scène GameOver.")]
+    public AudioClip gameOverClip;
 }
