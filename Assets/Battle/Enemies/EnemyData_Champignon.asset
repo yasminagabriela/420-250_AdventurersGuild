@@ -21,6 +21,6 @@ MonoBehaviour:
   attackDamage: 1
   clips: []
   volume: 0.5
-  battleScale: 2
+  battleScale: 4
   battleOffset: {x: 5, y: 2.2}
-  flipX: 0
+  flipX: 1
