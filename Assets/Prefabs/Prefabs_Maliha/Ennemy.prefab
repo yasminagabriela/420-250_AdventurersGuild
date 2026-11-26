@@ -12,6 +12,10 @@ GameObject:
   - component: {fileID: 5014466290041338271}
   - component: {fileID: 6188537360295447259}
   - component: {fileID: 3275292806937358340}
+  - component: {fileID: 484668942217408306}
+  - component: {fileID: 7361820600830666988}
+  - component: {fileID: 4414894221344949122}
+  - component: {fileID: 984520856285813905}
   m_Layer: 0
   m_Name: Ennemy
   m_TagString: Ennemi
@@ -127,7 +131,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.16332054, y: 0.08736497}
+  m_Offset: {x: -0.0064849257, y: -0.004122138}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -137,7 +141,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5.1054974, y: 4.169173}
+  m_Size: {x: 1.6551205, y: 2.104173}
   m_EdgeRadius: 0
 --- !u!50 &3275292806937358340
 Rigidbody2D:
@@ -154,7 +158,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -166,3 +170,85 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &484668942217408306
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999377120159075789}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 74be59ac8af5f9448a854f7df0f46f27, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7361820600830666988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999377120159075789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb1df2754d165d4a8386db0e9054ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::BattleTrigger
+  theme: {fileID: 11400000, guid: 143b3d3af8be07545b4570144f35c7db, type: 2}
+  enemyId: Ennemy_1
+  battleSceneName: BattleScene
+  animator: {fileID: 484668942217408306}
+  patrol: {fileID: 4414894221344949122}
+  attackDelay: 0.6
+  enemyData: {fileID: 11400000, guid: 2fee5aeb5b4a25240b859b799a6c9914, type: 2}
+--- !u!114 &4414894221344949122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999377120159075789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e70a1312199d5934da23324c4709d416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::EnemyPatrol
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  moveSpeed: 2
+  waitTime: 0.5
+  pingPong: 1
+  body: {fileID: 3275292806937358340}
+  animator: {fileID: 484668942217408306}
+  spriteRenderer: {fileID: 5014466290041338271}
+  useBlendTrees: 0
+--- !u!114 &984520856285813905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999377120159075789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc7e97446f4773469d54bee9a1e032d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::HealthManager
+  maxHealth: 12
+  currentHealth: 0
+  isPlayer: 0
