@@ -281,8 +281,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec747375a0248940a66ce51164902cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::MainMenuManager
-  firstLevelName: Level_01
-  menuMusic: {fileID: 0}
+  levels:
+  - level: 1
+    button: {fileID: 1109905470}
+    character: {fileID: 536021359}
+  - level: 2
+    button: {fileID: 1739369013}
+    character: {fileID: 1239422865}
+  - level: 3
+    button: {fileID: 2000479287}
+    character: {fileID: 2030641994}
+  - level: 4
+    button: {fileID: 545021915}
+    character: {fileID: 871814095}
+  lockedColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
+  blinkColor: {r: 1, g: 0.85, b: 0.1, a: 1}
+  blinkSpeed: 3
+  blinkThickness: {x: 8, y: -8}
+  menuMusic: {fileID: 8300000, guid: b68883d40eabdfd45b72c2a40ebd6cfc, type: 3}
   volume: 0.6
 --- !u!4 &304858102
 Transform:
@@ -456,19 +472,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 545021916}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 304858101}
-        m_TargetAssemblyTypeName: MainMenuManager, GameScripts
-        m_MethodName: LoadLevel
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Level_01
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &545021916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,19 +839,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1109905471}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 304858101}
-        m_TargetAssemblyTypeName: MainMenuManager, GameScripts
-        m_MethodName: LoadLevel
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Level_01
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1109905471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1702,19 +1694,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1739369014}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 304858101}
-        m_TargetAssemblyTypeName: MainMenuManager, GameScripts
-        m_MethodName: LoadLevel
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Level_01
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1739369014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2109,19 +2089,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2000479288}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 304858101}
-        m_TargetAssemblyTypeName: MainMenuManager, GameScripts
-        m_MethodName: LoadLevel
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Level_01
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2000479288
 MonoBehaviour:
   m_ObjectHideFlags: 0

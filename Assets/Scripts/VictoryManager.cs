@@ -10,6 +10,7 @@ public class VictoryManager : MonoBehaviour
 
     public void Victory()
     {
+        LevelProgress.CompleteCurrentLevel();  // débloque le niveau suivant dans le menu
         victoryPanel.SetActive(true);
         victoryText.SetActive(true);
         restartButton.SetActive(true);
