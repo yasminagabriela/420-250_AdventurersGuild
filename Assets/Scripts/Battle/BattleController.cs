@@ -33,6 +33,8 @@ public class BattleController : MonoBehaviour
 
     [Header("Fin du combat")]
     [SerializeField] private float endDelay = 1.5f;
+    [Tooltip("Scène chargée quand le joueur perd le combat.")]
+    [SerializeField] private string gameOverSceneName = "GameOver";
 
     private BattleState _state = BattleState.PlayerTurn;
     private bool _busy;
@@ -298,10 +300,17 @@ public class BattleController : MonoBehaviour
 
         yield return new WaitForSeconds(endDelay);
 
+
+
+
         if (_state == BattleState.Won && !string.IsNullOrEmpty(BattleContext.ReturnSceneName))
         {
             BattleContext.IgnoreBattlesUntil = Time.time + 2f;
             SceneManager.LoadScene(BattleContext.ReturnSceneName);
+        }
+        else if (_state == BattleState.Lost && !string.IsNullOrEmpty(gameOverSceneName))
+        {
+            SceneManager.LoadScene(gameOverSceneName);
         }
     }
 
