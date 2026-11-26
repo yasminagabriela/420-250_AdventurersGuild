@@ -15,3 +15,14 @@ MonoBehaviour:
   background: {fileID: 21300000, guid: 668295661ca5b6d4baaa9ec65d1011f2, type: 3}
   playerAnimator: {fileID: 9100000, guid: a723ec67583c00741b6f29584d0770db, type: 2}
   playerSprite: {fileID: 21300000, guid: b5cc9e3d89087d54eb6120b60eecde5e, type: 3}
+  playerScale: 3
+  playerOffset: {x: -3, y: 0}
+  enemyOffset: {x: 0, y: 0}
+  enemyAnimator: {fileID: 0}
+  enemySprite: {fileID: 0}
+  enemyFlipX: 0
+  enemyScale: 1
+  battleMusic: {fileID: 0}
+  attackStartClip: {fileID: 0}
+  attackEndClip: {fileID: 0}
+  healClip: {fileID: 0}

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AdventurersGuild
@@ -10,6 +11,20 @@ namespace AdventurersGuild
     {
         [SerializeField] protected float interactRadius = 1.3f;
         [SerializeField] protected Vector3 promptOffset = new Vector3(0f, 0.9f, 0f);
+
+        // Ce qui a déjà été utilisé (coffres ouverts, cadeaux reçus) : garde la mémoire
+        // quand on revient d'un combat (remplace l'ancien PartyState.Flags).
+        protected static readonly HashSet<string> UsedFlags = new HashSet<string>();
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetFlags() => UsedFlags.Clear();
+
+        /// <summary>Le HealthManager du joueur (code de l'équipe), ou null.</summary>
+        protected static HealthManager PlayerHealth()
+        {
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            return p != null ? p.GetComponent<HealthManager>() : null;
+        }
 
         private static Interactable _closest;
         private Transform _player;

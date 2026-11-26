@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2335df50def17548a98bb4ccaa86e9c, type: 3}
+  m_Name: EnemyData_Serpent
+  m_EditorClassIdentifier: GameScripts::EnemyData
+  enemyName: Serpent
+  battleSprite: {fileID: 21300000, guid: 7125798e8514e354da071d68efd2d32a, type: 3}
+  attackSprite: {fileID: 21300000, guid: b9dc7d3b8ea3ada44bffea7987d8e62a, type: 3}
+  attackEffectSprite: {fileID: 0}
+  animatorController: {fileID: 9100000, guid: dbc9166e122c019449ac66254a4ad4f8, type: 2}
+  maxHealth: 8
+  attackDamage: 2
+  clips: []
+  volume: 0.5
+  battleScale: 4
+  battleOffset: {x: 5, y: 2.2}
+  flipX: 1
