@@ -220,6 +220,7 @@ MonoBehaviour:
   animator: {fileID: 1235230495364508757}
   patrol: {fileID: 6718565515086949153}
   attackDelay: 0.6
+  enemyData: {fileID: 11400000, guid: 4738cdc672994a7896857f8375e11b3c, type: 2}
 --- !u!114 &6953629706272281906
 MonoBehaviour:
   m_ObjectHideFlags: 0
