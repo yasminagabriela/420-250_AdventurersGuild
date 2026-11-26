@@ -202,11 +202,18 @@ public class BattleController : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(damage);
-        
+
             if (playerHealth.currentHealth == 0)
+            {
                 playerAnimator.SetTrigger("Die");
+                yield return new WaitForSeconds(1f);
+                SceneManager.LoadScene("GameOver");
+            }
+
             else
+            {
                 playerAnimator.SetTrigger("Hurt");
+            }
         }
 
         PlayEnemyAttackSound();
