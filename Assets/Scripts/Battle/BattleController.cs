@@ -134,6 +134,7 @@ public class BattleController : MonoBehaviour
         if (EnemyHealth == 0)
         {
             PlayEnemySound(EnemySounds.EnemySoundType.Death);
+            enemyAnimator.SetTrigger("Die");
         }
         else if (EnemyHealth <= lowHealth && !_lowHealthPlayed)
         {
@@ -143,6 +144,7 @@ public class BattleController : MonoBehaviour
         else
         {
             PlayEnemySound(EnemySounds.EnemySoundType.Hurt);
+            enemyAnimator.SetTrigger("Hurt");
         }
 
         yield return new WaitForSeconds(Mathf.Max(0f, attackDuration - damageDelay));
@@ -198,8 +200,13 @@ public class BattleController : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(damage);
-            Debug.Log($"Joueur : {PlayerHealth}");
+        
+            if (playerHealth.currentHealth == 0)
+                playerAnimator.SetTrigger("Die");
+            else
+                playerAnimator.SetTrigger("Hurt");
         }
+
         PlayEnemyAttackSound();
         yield return StartCoroutine(FlashPlayer());
 

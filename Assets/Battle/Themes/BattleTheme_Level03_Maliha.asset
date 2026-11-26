@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::BattleTheme
   background: {fileID: 450828795633703118, guid: 75ddc1a841579c44bb86ed46f70dfe86, type: 3}
   playerAnimator: {fileID: 9100000, guid: 43cfdce4de52d984c82dddbe9f628d03, type: 2}
-  playerSprite: {fileID: 0}
+  playerSprite: {fileID: 9097583082903234559, guid: 075ccbb698a468a43820f879c45e58c8, type: 3}
   playerScale: 2
   playerOffset: {x: -4, y: 0}
-  enemyAnimator: {fileID: 0}
-  enemySprite: {fileID: 0}
+  enemyOffset: {x: 2.5, y: 2.5}
+  enemyAnimator: {fileID: 9100000, guid: 74be59ac8af5f9448a854f7df0f46f27, type: 2}
+  enemySprite: {fileID: 4089636935794680599, guid: 10d387ee58bb85c4c90bd9ca27e5ad9d, type: 3}
   enemyFlipX: 1
   enemyScale: 2
-  enemyOffset: {x: 2.5, y: 2.5}
   battleMusic: {fileID: 0}
   attackStartClip: {fileID: 0}
   attackEndClip: {fileID: 0}
