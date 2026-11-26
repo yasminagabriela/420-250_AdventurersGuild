@@ -7,6 +7,7 @@ public class HealthManager : MonoBehaviour
     public int maxHealth = 7;
     public int currentHealth;
     public bool isPlayer = false;
+    public event Action<HealthManager> OnDamaged;
     public event Action<HealthManager> OnDied;
 
     static int savedHealth;
@@ -27,7 +28,7 @@ public class HealthManager : MonoBehaviour
         string level = SceneManager.GetActiveScene().name;
         if (level == "BattleScene") level = BattleContext.ReturnSceneName;
 
-        if (level == savedLevel) currentHealth = savedHealth;
+        if (level == savedLevel && savedHealth > 0) currentHealth = savedHealth;
         else { savedLevel = level; savedHealth = currentHealth; }
     }
 
@@ -36,7 +37,9 @@ public class HealthManager : MonoBehaviour
         if (currentHealth == 0) return;
         currentHealth = Health.ApplyDamage(currentHealth, damage);
         if (isPlayer) savedHealth = currentHealth;
+
         if (currentHealth == 0) OnDied?.Invoke(this);
+        else OnDamaged?.Invoke(this);
     }
 
     public void Heal(int amount)

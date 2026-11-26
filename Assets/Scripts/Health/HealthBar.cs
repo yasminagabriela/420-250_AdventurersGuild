@@ -11,7 +11,7 @@ public class HealthBar : MonoBehaviour
     private const float NormalY = 0.92f;
     private const float BattleX = 0.22f;
     private const float BattleY = 0.30f;
-    private const float EnemyBattleX = 0.75f;
+    private const float EnemyBattleX = 0.78f;
     private const float EnemyBattleY = 0.55f;
 
     [SerializeField] private HealthManager target;
