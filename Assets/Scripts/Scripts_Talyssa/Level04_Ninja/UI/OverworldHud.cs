@@ -4,7 +4,7 @@ namespace AdventurersGuild
 {
     /// <summary>
     /// Titre du niveau + objectif pendant l'exploration (issue #6).
-    /// La barre de vie est enlevée : les PV sont affichés par le HealthBar de l'équipe.
+    /// Les PV sont affichés par le HealthBar de l'équipe.
     /// </summary>
     public class OverworldHud : MonoBehaviour
     {
@@ -16,7 +16,8 @@ namespace AdventurersGuild
 
         private void OnGUI()
         {
-            if (DialogueBox.IsOpen) return;
+            // Rien pendant un dialogue ou quand le jeu est en pause (menu Paused)
+            if (DialogueBox.IsOpen || Time.timeScale == 0f) return;
 
             float vw = PixelGUI.VirtualWidth;
             if (Time.timeSinceLevelLoad < titleDuration && !BattleContext.HasReturnPosition)
