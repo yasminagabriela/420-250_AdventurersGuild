@@ -24,6 +24,7 @@ public class PauseManager : MonoBehaviour
         isPaused = true;
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
+        AudioListener.pause = true;
     }
 
     public void Resume()
@@ -31,11 +32,13 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
+        AudioListener.pause = false;
     }
 
     public void GoToMainMenu()
     {
         Time.timeScale = 1f;
+        AudioListener.pause = false;
         SceneManager.LoadScene(mainMenuSceneName);
     }
 }
