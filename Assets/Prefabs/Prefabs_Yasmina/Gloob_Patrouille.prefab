@@ -254,7 +254,7 @@ MonoBehaviour:
   battleSceneName: BattleScene
   animator: {fileID: 8032414645864614784}
   patrol: {fileID: 728463891889334627}
-  attackDelay: 0.6
+  attackDelay: 0.8
   enemyData: {fileID: 11400000, guid: 472c5cb76ebc03d44b1ea5adb1a76cc5, type: 2}
 --- !u!1 &6275946336558336449
 GameObject:

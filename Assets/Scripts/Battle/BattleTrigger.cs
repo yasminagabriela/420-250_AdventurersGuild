@@ -33,6 +33,8 @@ public class BattleTrigger : MonoBehaviour
     private IEnumerator StartBattle(Collider2D player)
     {
         if (patrol != null) patrol.Stop();
+
+        // Le joueur ne bouge plus
         PlayerController controller = player.GetComponent<PlayerController>();
         if (controller != null) controller.enabled = false;
 
@@ -43,7 +45,11 @@ public class BattleTrigger : MonoBehaviour
         BattleContext.HasReturnPosition = true;
         BattleContext.ReturnSceneName = SceneManager.GetActiveScene().name;
 
+        // Gloob attaque, le joueur se fâche
         animator.SetTrigger("Attack");
+        Animator playerAnim = player.GetComponent<Animator>();
+        if (playerAnim != null) playerAnim.SetTrigger("Mad");
+
         yield return new WaitForSeconds(attackDelay);
 
         SceneManager.LoadScene(battleSceneName);
