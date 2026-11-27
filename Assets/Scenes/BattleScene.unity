@@ -716,6 +716,7 @@ MonoBehaviour:
   enemyRenderer: {fileID: 1695164603}
   enemyHealth: {fileID: 1695164602}
   fallbackEnemy: {fileID: 11400000, guid: 93bbd5f22da9729458a20abd56e058f1, type: 2}
+  enemyAnimator: {fileID: 0}
 --- !u!4 &853651052
 Transform:
   m_ObjectHideFlags: 0
@@ -1111,15 +1112,26 @@ MonoBehaviour:
   playerHealth: {fileID: 1453264566}
   enemyHealth: {fileID: 1695164602}
   playerAnimator: {fileID: 1453264565}
-  playerDamage: 2
+  attackDamage: 3
+  healAmount: 4
+  damageDelay: 0.4
   attackDuration: 0.85
   playerSounds: {fileID: 1453264568}
-  enemyDamage: 1
-  enemyDelay: 0.6
+  enemyApplier: {fileID: 0}
   enemyAnimator: {fileID: 1695164605}
+  effectRenderer: {fileID: 0}
   enemySounds: {fileID: 1695164607}
-  healAmount: 4
+  fallbackEnemyDamage: 2
+  enemyTurnDelay: 0.8
+  enemyHitDelay: 0.35
+  enemyAttackDuration: 0.85
+  lungeDistance: 0.75
+  effectDuration: 0.4
   lowHealth: 3
+  endDelay: 1.5
+  gameOverSceneName: GameOver
+  clawEffectPrefab: {fileID: 5262286409930414469, guid: e8c71f1bd1c1d3f4789f914a297b5946, type: 3}
+  effectOffset: {x: 0, y: 0.5, z: 0}
 --- !u!4 &1126535646
 Transform:
   m_ObjectHideFlags: 0
@@ -1190,10 +1202,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.22918919
-    y: 0.09641256
-    width: 0.5405406
-    height: 0.8071749
+    x: 0.27517986
+    y: 0.11538462
+    width: 0.4496403
+    height: 0.7692308
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
