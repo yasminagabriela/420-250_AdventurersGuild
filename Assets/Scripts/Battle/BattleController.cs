@@ -36,6 +36,10 @@ public class BattleController : MonoBehaviour
     [Tooltip("Scène chargée quand le joueur perd le combat.")]
     [SerializeField] private string gameOverSceneName = "GameOver";
 
+    [Header("Effets")]
+    [SerializeField] private GameObject clawEffectPrefab;
+    [SerializeField] private Vector3 effectOffset = Vector3.zero;
+
     private BattleState _state = BattleState.PlayerTurn;
     private bool _busy;
     private bool _lowHealthPlayed;
@@ -130,6 +134,7 @@ public class BattleController : MonoBehaviour
         if (enemyHealth != null)
         {
             enemyHealth.TakeDamage(attackDamage);
+            SpawnEffect(clawEffectPrefab, enemyHealth.transform);
             Debug.Log($"Ennemi : {EnemyHealth}");
         }
 
@@ -202,6 +207,7 @@ public class BattleController : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(damage);
+            SpawnEffect(clawEffectPrefab, playerHealth.transform);
 
             if (playerHealth.currentHealth == 0)
             {
@@ -338,5 +344,11 @@ public class BattleController : MonoBehaviour
 
         BattleContext.IgnoreBattlesUntil = Time.time + 2f;
         SceneManager.LoadScene(BattleContext.ReturnSceneName);
+    }
+
+    private void SpawnEffect(GameObject prefab, Transform target)
+    {
+        if (prefab == null || target == null) return;
+        Instantiate(prefab, target.position + effectOffset, Quaternion.identity);
     }
 }
