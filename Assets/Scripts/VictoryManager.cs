@@ -18,6 +18,7 @@ public class VictoryManager : MonoBehaviour
 
     public void RestartGame()
     {
+        IntroManager.introOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

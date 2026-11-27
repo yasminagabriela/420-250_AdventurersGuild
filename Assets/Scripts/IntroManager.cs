@@ -6,8 +6,26 @@ public class IntroManager : MonoBehaviour
     public GameObject introPanel;
     private bool started;
 
+    // Remains true throughout scene leads - ex: when battle ends 
+    public static bool introOver;
+
+    // Resets when pressed Play again in the editor 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void ResetIntro()
+    {
+        introOver = false;
+    }
+
     void Start()
     {
+        if (introOver)
+        {
+            // skip intro
+            started = true;
+            introPanel.SetActive(false);
+            Time.timeScale = 1f;
+            return;
+        }
         introPanel.SetActive(true);
         // game freeze 
         Time.timeScale = 0f; 
@@ -25,6 +43,7 @@ public class IntroManager : MonoBehaviour
     void StartGame()
     {
         started = true;
+        introOver = true;
         introPanel.SetActive(false);
         Time.timeScale = 1f;
     }
