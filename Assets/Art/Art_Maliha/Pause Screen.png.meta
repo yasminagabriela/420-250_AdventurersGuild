@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 035342223082238438a0cc12473aef48
+guid: 947d0ed4dd644e345a97eac21abab55d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8814493358850304962
-    second: Pause Screen 1_0
+      213: 314767250290790195
+    second: Pause Screen_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pause Screen 1_0
+      name: Pause Screen_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e3410b6cdf0aca580800000000000000
-      internalID: -8814493358850304962
+      spriteID: 33f428c75274e5400800000000000000
+      internalID: 314767250290790195
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Pause Screen 1_0: -8814493358850304962
+      Pause Screen_0: 314767250290790195
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
