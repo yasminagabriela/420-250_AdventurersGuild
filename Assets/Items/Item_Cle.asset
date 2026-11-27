@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f52c734dd82bdb42b9b52517fe17f08, type: 3}
   m_Name: Item_Cle
   m_EditorClassIdentifier: GameScripts::ItemData
-  itemName: 
-  icon: {fileID: 0}
+  itemName: "Cl\xE9"
+  icon: {fileID: 1095141833252711340, guid: 6d449f3b834aa5c468231b4a72bc38a3, type: 3}
   soin: 0
   maxPile: 99

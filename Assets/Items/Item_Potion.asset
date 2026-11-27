@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f52c734dd82bdb42b9b52517fe17f08, type: 3}
   m_Name: Item_Potion
   m_EditorClassIdentifier: GameScripts::ItemData
-  itemName: 
-  icon: {fileID: 0}
-  soin: 0
+  itemName: Potion
+  icon: {fileID: 21300000, guid: 69e74d663e6ce8848b869f5256e231e3, type: 3}
+  soin: 3
   maxPile: 99
