@@ -8,6 +8,7 @@ public class BattleController : MonoBehaviour
     [SerializeField] private HealthManager playerHealth;
     [SerializeField] private HealthManager enemyHealth;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private ItemData potion;          // glisser Item_Potion dans l'Inspector
 
     [Header("Joueur")]
     [SerializeField] private int attackDamage = 3;
@@ -95,16 +96,12 @@ public class BattleController : MonoBehaviour
                 break;
 
             case 1:
-                if (PlayerHealth >= playerHealth.maxHealth)
+                if (!CanHeal())
                 {
                     _busy = false;
-                    yield break;            // vie pleine : le tour n'est pas consommé
+                    yield break;            // vie pleine ou pas de potion : le tour n'est pas consommé
                 }
-                playerHealth.Heal(healAmount);
-                if (playerSounds != null) playerSounds.PlayHeal();
-                if (PlayerHealth > lowHealth) _tauntPlayed = false;
-                Debug.Log($"Joueur : {PlayerHealth}/{playerHealth.maxHealth}");
-                yield return new WaitForSeconds(0.5f);
+                yield return StartCoroutine(HealTurn());
                 break;
 
             case 2:
@@ -155,6 +152,28 @@ public class BattleController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(Mathf.Max(0f, attackDuration - damageDelay));
+    }
+
+    // Le joueur peut se soigner seulement s'il n'a pas toute sa vie ET qu'il a une potion
+    private bool CanHeal()
+    {
+        if (playerHealth == null || PlayerHealth >= playerHealth.maxHealth) return false;
+        if (potion == null || Inventory.Compter(potion) == 0)
+        {
+            Debug.Log("Aucune potion !");
+            return false;
+        }
+        return true;
+    }
+
+    private IEnumerator HealTurn()
+    {
+        Inventory.RetirerItem(potion);                  // utilise 1 potion
+        playerHealth.Heal(potion.soin);                 // le soin de HealthManager / Health
+        if (playerSounds != null) playerSounds.PlayHeal();
+        if (PlayerHealth > lowHealth) _tauntPlayed = false;
+        Debug.Log($"Joueur : {PlayerHealth}/{playerHealth.maxHealth} (potions : {Inventory.Compter(potion)})");
+        yield return new WaitForSeconds(0.5f);
     }
 
     private IEnumerator AdvanceTurn()

@@ -1112,6 +1112,7 @@ MonoBehaviour:
   playerHealth: {fileID: 1453264566}
   enemyHealth: {fileID: 1695164602}
   playerAnimator: {fileID: 1453264565}
+  potion: {fileID: 0}
   attackDamage: 3
   healAmount: 4
   damageDelay: 0.4
@@ -1202,10 +1203,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.27517986
-    y: 0.11538462
-    width: 0.4496403
-    height: 0.7692308
+    x: 0.083333336
+    y: 0.01111111
+    width: 0.2604167
+    height: 0.3333333
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
