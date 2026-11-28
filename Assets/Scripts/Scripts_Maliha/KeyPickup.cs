@@ -1,32 +1,15 @@
-
 using UnityEngine;
 
+// Sur le Joueur. Le ramassage se fait maintenant avec ItemPickup (sur chaque clé),
+// qui met la clé dans l'inventaire. Ce script sert à savoir si le joueur a une clé et à l'utiliser.
 public class KeyPickup : MonoBehaviour
 {
-    [SerializeField] private AudioClip pickupSound;
-    [SerializeField] private AudioSource playerAudioSource;
-    [SerializeField] private int keyCount = 0;
+    [SerializeField] private ItemData keyItem;   // glisser Item_Cle
 
-    public bool HasKey => keyCount > 0;
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!other.CompareTag("Key"))
-            return;
-
-        keyCount++;
-
-        playerAudioSource.PlayOneShot(pickupSound);
-
-        Debug.Log("Key detruit!");
-        Destroy(other.gameObject);
-    }
+    public bool HasKey => Inventory.Compter(keyItem) > 0;
 
     public bool UseKey()
     {
-        if (keyCount <= 0)
-            return false;
-
-        keyCount--;
-        return true;
+        return Inventory.RetirerItem(keyItem);   // retire 1 clé de la barre, false s'il n'y en a pas
     }
 }

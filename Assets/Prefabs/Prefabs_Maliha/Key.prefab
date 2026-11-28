@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7661335696408941024}
   - component: {fileID: 7081675711849124657}
   - component: {fileID: 6713182733799090420}
+  - component: {fileID: 2385827594135171912}
   m_Layer: 0
   m_Name: Key
   m_TagString: Key
@@ -166,3 +167,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.044691242, y: 0.044691242}
   m_EdgeRadius: 0
+--- !u!114 &2385827594135171912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5569780346529090599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea50a2203a9d3c240b0227de8df59a91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::ItemPickup
+  item: {fileID: 11400000, guid: 9189b4f5a3f357e4785f3b94f399b3a2, type: 2}
+  quantite: 1
+  pickupId: level01_objet_a
+  pickupSound: {fileID: 8300000, guid: 371feae7ab5bbd34db2826008b85d308, type: 3}
